@@ -42,8 +42,8 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-background overflow-hidden font-sans">
-      <header className="flex items-center justify-between p-4 pt-10">
+    <div className="flex flex-col min-h-screen bg-background font-sans">
+      <header className="flex items-center justify-between p-4 pt-10 sticky top-0 bg-background z-10">
         <button className="p-2 text-slate-400">
           <span className="material-symbols-outlined">close</span>
         </button>
@@ -87,7 +87,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
         </div>
 
         {/* 输入表单 */}
-        <div className="space-y-6 flex-1">
+        <div className="space-y-6">
           <div className="space-y-4">
             <div className="relative">
               <span className="absolute left-5 top-1/2 -translate-y-1/2 material-symbols-outlined text-slate-300">smartphone</span>
@@ -127,7 +127,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
         </div>
 
         {/* 底部协议与第三方 */}
-        <div className="mt-auto pt-8">
+        <div className="mt-12 pb-10">
           <div className="flex flex-col items-center gap-6 mb-8">
             <div className="flex items-center gap-4">
               <div className="h-[1px] w-12 bg-slate-200"></div>
