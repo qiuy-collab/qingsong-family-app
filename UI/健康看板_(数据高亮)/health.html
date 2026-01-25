@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>健康看板 - 轻松智拍</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"/>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#3B82F6", // Qingsong Blue
+              "background-light": "#F8FAFC",
+              "background-dark": "#0F172A",
+              "card-light": "#FFFFFF",
+              "card-dark": "#1E293B",
+            },
+            fontFamily: {
+              display: ["Inter", "PingFang SC", "Microsoft YaHei", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "1.25rem",
+            },
+          },
+        },
+      };
+    </script>
+<style>
+        body { font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif; }
+        .chart-gradient {
+            background: linear-gradient(180deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0) 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen pb-24">
+<div class="h-11"></div>
+<header class="px-6 py-4 flex items-center justify-between sticky top-0 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md z-10">
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-white dark:bg-slate-800 shadow-sm">
+<span class="material-icons-round text-slate-600 dark:text-slate-300">chevron_left</span>
+</button>
+<h1 class="text-lg font-bold">健康看板</h1>
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-white dark:bg-slate-800 shadow-sm">
+<span class="material-icons-round text-slate-600 dark:text-slate-300 text-xl">calendar_today</span>
+</button>
+</header>
+<main class="px-5 space-y-6">
+<div class="flex items-center space-x-4 mt-2">
+<div class="relative">
+<img alt="林奶奶头像" class="w-16 h-16 rounded-full object-cover border-2 border-white dark:border-slate-700 shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxXu9kKOo7aj8z40ueBoK1v0TEMUtHS3ogaoj1m6zqp4SAVEmvz-NYmDPhJZEvDWQnk4UiUhe_6C4Rq-42o9stJhnGcCDhM84KQWV4IpGcSLJDhQ9STtUoZK3DsP2NmYa9PuEjx80LkF-2NIu59WaaGd1nJu4T1LN9I5tGk7ibtLck6hD1UTVsQdT3H124KPvjKmohpsbtVFOcIHF3C-EkuOsOrCVPYhuKMtCR2xNVD-RrhtXmIYd5m0g8lu78toybJQl-p0TSgLe8"/>
+<div class="absolute bottom-0 right-0 w-4 h-4 bg-green-500 border-2 border-white dark:border-slate-900 rounded-full"></div>
+</div>
+<div>
+<h2 class="text-xl font-bold">林奶奶</h2>
+<div class="flex items-center text-xs text-slate-500 dark:text-slate-400 mt-1">
+<span class="material-icons-round text-sm mr-1">sync</span>
+                    已同步 10 分钟前
+                </div>
+</div>
+</div>
+<div class="bg-white dark:bg-card-dark rounded-3xl p-5 shadow-sm border-l-4 border-red-500 relative overflow-hidden">
+<div class="flex items-start justify-between">
+<div class="flex items-center space-x-3">
+<div class="w-10 h-10 rounded-2xl bg-red-50 dark:bg-red-900/20 flex items-center justify-center">
+<span class="material-icons-round text-red-500">warning</span>
+</div>
+<h3 class="font-bold text-slate-800 dark:text-slate-100">注意：血压升高</h3>
+</div>
+</div>
+<p class="mt-3 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                读数略高于平常平均值 (145/95 mmHg)。
+            </p>
+<div class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-700 flex justify-end">
+<button class="flex items-center text-sm font-semibold text-primary">
+                    查看详情 <span class="material-icons-round text-sm ml-1">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-white dark:bg-card-dark p-5 rounded-3xl shadow-sm relative overflow-hidden">
+<span class="material-icons-round absolute top-4 right-4 text-blue-100 dark:text-blue-900/30 text-5xl opacity-50">favorite</span>
+<p class="text-sm font-medium text-slate-500 dark:text-slate-400">心率</p>
+<div class="mt-2 flex items-baseline space-x-1">
+<span class="text-3xl font-bold">72</span>
+<span class="text-xs text-slate-400">次/分</span>
+</div>
+<div class="mt-4 inline-flex items-center px-2 py-1 bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 text-xs font-bold rounded-full">
+<span class="w-1.5 h-1.5 rounded-full bg-green-500 mr-1.5"></span>
+                    正常
+                </div>
+</div>
+<div class="bg-white dark:bg-card-dark p-5 rounded-3xl shadow-sm relative overflow-hidden">
+<span class="material-icons-round absolute top-4 right-4 text-red-100 dark:text-red-900/30 text-5xl opacity-50">speed</span>
+<p class="text-sm font-medium text-slate-500 dark:text-slate-400">血压</p>
+<div class="mt-2 flex items-baseline space-x-1">
+<span class="text-3xl font-bold">145/95</span>
+</div>
+<p class="text-[10px] text-slate-400 mt-0.5">mmHg</p>
+<div class="mt-2 inline-flex items-center px-2 py-1 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 text-xs font-bold rounded-full">
+<span class="material-icons-round text-xs mr-1">warning</span>
+                    高
+                </div>
+</div>
+</div>
+<div class="bg-white dark:bg-card-dark rounded-3xl p-6 shadow-sm">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-lg font-bold">趋势</h3>
+<div class="bg-slate-100 dark:bg-slate-800 p-1 rounded-xl flex">
+<button class="px-4 py-1.5 text-xs font-bold rounded-lg bg-white dark:bg-slate-700 shadow-sm">7 天</button>
+<button class="px-4 py-1.5 text-xs font-medium text-slate-500 dark:text-slate-400">30 天</button>
+</div>
+</div>
+<div class="mb-4 flex items-baseline justify-between">
+<p class="text-sm font-bold text-slate-800 dark:text-slate-100">血压历史</p>
+<p class="text-xs text-slate-400">平均: <span class="font-semibold text-slate-600 dark:text-slate-300">138/88</span></p>
+</div>
+<div class="relative h-40 w-full mb-4">
+<svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 300 100">
+<path d="M0 80 Q 25 75, 50 65 T 100 70 T 150 55 T 200 75 T 250 50 T 300 65" fill="none" stroke="#3B82F6" stroke-linecap="round" stroke-width="3"></path>
+<path d="M0 80 Q 25 75, 50 65 T 100 70 T 150 55 T 200 75 T 250 50 T 300 65 V 100 H 0 Z" fill="url(#chartGradient)" opacity="0.1"></path>
+<defs>
+<linearGradient id="chartGradient" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color:#3B82F6;stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:#3B82F6;stop-opacity:0"></stop>
+</linearGradient>
+</defs>
+<circle cx="250" cy="50" fill="white" r="4" stroke="#3B82F6" stroke-width="2"></circle>
+</svg>
+<div class="absolute top-2 right-[12%] bg-slate-800 dark:bg-slate-900 text-white px-2 py-1 rounded-lg text-[10px] font-bold shadow-lg after:content-[''] after:absolute after:top-full after:left-1/2 after:-ml-1 after:border-4 after:border-transparent after:border-t-slate-800">
+                    145/95
+                </div>
+</div>
+<div class="flex justify-between text-[10px] text-slate-400 px-1">
+<span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span>
+</div>
+</div>
+<div class="space-y-4">
+<h3 class="text-lg font-bold px-1">护理行动</h3>
+<div class="bg-white dark:bg-card-dark p-4 rounded-3xl shadow-sm flex items-center justify-between">
+<div class="flex items-center space-x-4">
+<div class="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center">
+<span class="material-icons-round text-primary">call</span>
+</div>
+<div>
+<p class="font-bold text-slate-800 dark:text-slate-100">呼叫护理员</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">Dr. Wang (Geriatrician)</p>
+</div>
+</div>
+<span class="material-icons-round text-slate-300">chevron_right</span>
+</div>
+<div class="bg-white dark:bg-card-dark p-4 rounded-3xl shadow-sm flex items-center justify-between">
+<div class="flex items-center space-x-4">
+<div class="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center">
+<span class="material-icons-round text-primary">note_add</span>
+</div>
+<div>
+<p class="font-bold text-slate-800 dark:text-slate-100">添加手动记录</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">添加手动记录或记录</p>
+</div>
+</div>
+<span class="material-icons-round text-slate-300">chevron_right</span>
+</div>
+</div>
+</main>
+<nav class="fixed bottom-0 left-0 right-0 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl border-t border-slate-100 dark:border-slate-800 px-6 pb-8 pt-3 flex justify-between items-center z-50">
+<button class="flex flex-col items-center space-y-1 w-1/5">
+<span class="material-icons-round text-slate-400 dark:text-slate-500">home</span>
+<span class="text-[10px] text-slate-500 font-medium">首页</span>
+</button>
+<button class="flex flex-col items-center space-y-1 w-1/5">
+<span class="material-icons-round text-primary">favorite</span>
+<span class="text-[10px] text-primary font-bold">数据</span>
+</button>
+<button class="flex flex-col items-center space-y-1 w-1/5">
+<span class="material-icons-round text-slate-400 dark:text-slate-500">auto_awesome</span>
+<span class="text-[10px] text-slate-500 font-medium">动态</span>
+</button>
+<button class="flex flex-col items-center space-y-1 w-1/5">
+<span class="material-icons-round text-slate-400 dark:text-slate-500">medical_services</span>
+<span class="text-[10px] text-slate-500 font-medium">服务</span>
+</button>
+<button class="flex flex-col items-center space-y-1 w-1/5">
+<span class="material-icons-round text-slate-400 dark:text-slate-500">person</span>
+<span class="text-[10px] text-slate-500 font-medium">我的</span>
+</button>
+</nav>
+<div class="fixed bottom-1.5 left-1/2 -translate-x-1/2 w-32 h-1 bg-slate-900/20 dark:bg-slate-100/20 rounded-full z-[60]"></div>
+
+</body></html>

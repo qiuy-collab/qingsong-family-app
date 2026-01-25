@@ -1,0 +1,7 @@
+{
+  "name": "青松智陪 - 家属端",
+  "description": "高保真智慧养老家属端APP，提供实时健康监测、机构筛选、在线签约、服务追踪及家庭成员管理等核心功能。",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}

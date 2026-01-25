@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2b8cee",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Lexend', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-[#0d141b] transition-colors duration-300">
+<div class="relative flex h-screen w-full flex-col overflow-hidden max-w-[430px] mx-auto shadow-2xl bg-white dark:bg-[#101922]">
+<!-- TopAppBar / Skip Action -->
+<header class="flex items-center justify-end p-6 pt-12">
+<button class="text-[#4c739a] dark:text-gray-400 text-base font-medium leading-normal tracking-wide hover:opacity-70 transition-opacity">
+                跳过
+            </button>
+</header>
+<!-- Illustration Section -->
+<main class="flex-1 flex flex-col items-center justify-center px-6">
+<div class="w-full aspect-square relative mb-8 flex items-center justify-center">
+<!-- Decorative background elements for "warmth" -->
+<div class="absolute inset-0 bg-primary/5 rounded-full blur-3xl"></div>
+<!-- Main Illustration Placeholder -->
+<div class="relative w-full h-full max-h-[320px] rounded-3xl overflow-hidden bg-gradient-to-br from-primary/10 to-orange-50 dark:from-primary/20 dark:to-orange-900/10 flex items-center justify-center border border-white/20 shadow-sm" data-alt="Illustration of a happy family video calling an elderly relative on a tablet">
+<div class="flex flex-col items-center gap-4">
+<span class="material-symbols-outlined text-[120px] text-primary/80">
+                            video_chat
+                         </span>
+<div class="flex -space-x-4">
+<div class="w-16 h-16 rounded-full border-4 border-white bg-blue-100 flex items-center justify-center">
+<span class="material-symbols-outlined text-blue-500">person</span>
+</div>
+<div class="w-16 h-16 rounded-full border-4 border-white bg-orange-100 flex items-center justify-center">
+<span class="material-symbols-outlined text-orange-500">elderly</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Headline Text -->
+<div class="space-y-3 text-center mb-6">
+<h1 class="text-[#0d141b] dark:text-white tracking-tight text-3xl font-bold leading-tight px-2">
+                    智慧陪护，让爱更近
+                </h1>
+<p class="text-[#4c739a] dark:text-gray-400 text-base font-normal leading-relaxed px-8">
+                    轻松智陪，为您提供专业温情的科技养老服务。
+                </p>
+</div>
+<!-- Page Indicators -->
+<div class="flex w-full flex-row items-center justify-center gap-2.5 py-4">
+<div class="h-2.5 w-6 rounded-full bg-primary shadow-sm shadow-primary/30"></div>
+<div class="h-2 w-2 rounded-full bg-[#cfdbe7] dark:bg-gray-700"></div>
+<div class="h-2 w-2 rounded-full bg-[#cfdbe7] dark:bg-gray-700"></div>
+</div>
+</main>
+<!-- Footer Action -->
+<footer class="p-6 pb-12 flex flex-col items-center gap-4">
+<button class="w-full h-14 bg-primary hover:bg-primary/90 text-white text-lg font-semibold rounded-xl shadow-lg shadow-primary/25 transition-all active:scale-[0.98] flex items-center justify-center gap-2">
+<span>下一步</span>
+<span class="material-symbols-outlined text-xl">arrow_forward</span>
+</button>
+<!-- Branding Subtle Note -->
+<div class="flex items-center gap-1.5 opacity-40 grayscale">
+<span class="material-symbols-outlined text-sm">verified_user</span>
+<span class="text-xs font-medium uppercase tracking-widest">Qingsong Zhipai</span>
+</div>
+</footer>
+<!-- iOS Home Indicator Space -->
+<div class="h-2 w-32 bg-gray-200 dark:bg-gray-800 rounded-full mx-auto mb-2 opacity-20"></div>
+</div>
+</body></html>

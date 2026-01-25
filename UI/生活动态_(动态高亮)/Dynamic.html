@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>生活动态 - 轻松智派</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#3B82F6", // Qingsong Blue
+                        "background-light": "#F8FAFC",
+                        "background-dark": "#0F172A",
+                        "card-light": "#FFFFFF",
+                        "card-dark": "#1E293B",
+                    },
+                    fontFamily: {
+                        display: ["PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "1.5rem",
+                    },
+                },
+            },
+        };
+    </script>
+<style>
+        body {
+            font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "sans-serif";
+            -webkit-tap-highlight-color: transparent;
+        }
+        .timeline-line {
+            position: absolute;
+            left: 24px;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background-color: #E2E8F0;
+        }
+        .dark .timeline-line {
+            background-color: #334155;
+        }
+        .ios-status-bar {
+            height: 44px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex justify-center">
+<div class="w-full max-w-[430px] bg-background-light dark:bg-background-dark min-h-screen relative shadow-2xl overflow-hidden pb-24">
+<header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-6 pt-12 pb-4 flex items-center justify-between">
+<button class="p-2 -ml-2 text-slate-600 dark:text-slate-400">
+<span class="material-icons-outlined">arrow_back_ios</span>
+</button>
+<h1 class="text-lg font-bold">林奶奶的一天</h1>
+<button class="p-2 -mr-2 text-slate-600 dark:text-slate-400">
+<span class="material-icons-outlined">settings</span>
+</button>
+</header>
+<div class="px-6 mb-6">
+<div class="bg-card-light dark:bg-card-dark rounded-3xl p-5 shadow-sm border border-slate-100 dark:border-slate-800 flex items-center gap-4">
+<div class="relative">
+<img alt="Profile" class="w-16 h-16 rounded-full bg-slate-100" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4dytOnknW9_zekJ11EYWnC4FD3eYgubkLdNuUgv_iZxLBcnkbJcU05cqcsVSkmp0G5jd-KW3YQDW-Ihs78iLde2OuzZeS-FbBJaauvKWBPdgrVXOgltADHOcEQdLTm4hIWMfy7JYGdhjQjVg6L0glwfudpBeoU-3oWjbXpG_u0KMEF0B7Ta7FE6r0e7cS_B8Cs5kkpCHtRhUJIWjqDZRs6DHl2ntp8G3is-59rSONHz_qerW3t7RvldZ1kvsREmhLIUHKzF28d2Ox"/>
+<div class="absolute bottom-0 right-0 w-4 h-4 bg-green-500 border-2 border-white dark:border-card-dark rounded-full"></div>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-2">
+<h2 class="text-xl font-bold">林奶奶</h2>
+<span class="text-[10px] px-2 py-0.5 bg-green-100 dark:bg-green-900/30 text-green-600 rounded-full">在线</span>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400 mt-1 flex items-center gap-1">
+<span class="material-icons-outlined text-sm">bedtime</span> 状态：休息中
+                    </p>
+<p class="text-[11px] text-slate-400 mt-0.5">上次更新于 15 分钟前</p>
+</div>
+</div>
+</div>
+<div class="flex gap-3 px-6 mb-6 overflow-x-auto no-scrollbar">
+<button class="bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 px-5 py-2 rounded-full text-sm font-medium whitespace-nowrap flex items-center gap-1">
+<span class="material-icons-outlined text-sm">list</span> 全部动态
+            </button>
+<button class="bg-card-light dark:bg-card-dark text-slate-600 dark:text-slate-400 px-5 py-2 rounded-full text-sm font-medium whitespace-nowrap flex items-center gap-1 border border-slate-100 dark:border-slate-800">
+<span class="material-icons-outlined text-sm">restaurant</span> 饮食
+            </button>
+<button class="bg-card-light dark:bg-card-dark text-slate-600 dark:text-slate-400 px-5 py-2 rounded-full text-sm font-medium whitespace-nowrap flex items-center gap-1 border border-slate-100 dark:border-slate-800">
+<span class="material-icons-outlined text-sm">wb_sunny</span> 活动
+            </button>
+</div>
+<div class="relative px-6 space-y-8">
+<div class="timeline-line"></div>
+<div class="relative pl-10">
+<div class="absolute left-[-21px] top-1.5 w-2.5 h-2.5 rounded-full bg-primary border-4 border-background-light dark:border-background-dark outline outline-1 outline-primary/30"></div>
+<p class="text-xs font-bold text-slate-400 dark:text-slate-500 mb-3 tracking-wider uppercase">12:30 PM · 今天</p>
+<div class="bg-card-light dark:bg-card-dark rounded-3xl p-5 shadow-sm border border-slate-100 dark:border-slate-800">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-orange-100 dark:bg-orange-900/30 text-orange-600 rounded-2xl flex items-center justify-center">
+<span class="material-icons-outlined">restaurant</span>
+</div>
+<div>
+<h3 class="font-bold">午餐记录</h3>
+<p class="text-xs text-slate-400">B 餐厅</p>
+</div>
+</div>
+<span class="text-[10px] font-bold px-2 py-1 bg-green-50 dark:bg-green-900/20 text-green-600 rounded-lg">食用 90%</span>
+</div>
+<p class="text-slate-700 dark:text-slate-300 mb-4 text-sm font-medium">蔬菜炒肉和米饭</p>
+<div class="relative rounded-2xl overflow-hidden aspect-[4/2] bg-slate-200 dark:bg-slate-700">
+<img alt="Lunch Meal" class="w-full h-full object-cover blur-sm opacity-60" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSy3JulOyEUUgH_yPmytQK3HKf7SKMRfiLtNc9NbUduXDRGtwjjTD_lO2O5RV05ktlCCwnmjqLKTni8z6qvjyhZ1BOpodbjaze2bruEth1NxXATomKmVEbxK6yp0pRf2JrNpmnosPlDzg6zSA_bXQsUWYm1GLVr1ksn2q7huVxKmkblWO03wZj2t4cIShJWToq1K7L7YtFh1Xi0GMnrV2JA02opdSwAlL4ijzfY-U3R3y7m7E3r2YjbzPHfbhFsoneGhICLujbhBHX"/>
+<div class="absolute inset-0 flex flex-col items-center justify-center bg-black/20 text-white">
+<span class="material-icons-outlined text-3xl mb-1">visibility_off</span>
+<span class="text-xs font-medium">点击查看餐食</span>
+</div>
+</div>
+<div class="mt-4 flex flex-wrap gap-2">
+<span class="text-[10px] px-2 py-1 bg-slate-100 dark:bg-slate-800 text-slate-500 rounded-md">低钠</span>
+<span class="text-[10px] px-2 py-1 bg-slate-100 dark:bg-slate-800 text-slate-500 rounded-md">均衡</span>
+</div>
+</div>
+</div>
+<div class="relative pl-10">
+<div class="absolute left-[-21px] top-1.5 w-2.5 h-2.5 rounded-full bg-primary/40 border-4 border-background-light dark:border-background-dark"></div>
+<p class="text-xs font-bold text-slate-400 dark:text-slate-500 mb-3 tracking-wider uppercase">10:00 AM · 今天</p>
+<div class="bg-card-light dark:bg-card-dark rounded-3xl p-5 shadow-sm border border-slate-100 dark:border-slate-800">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 text-blue-600 rounded-2xl flex items-center justify-center">
+<span class="material-icons-outlined">self_improvement</span>
+</div>
+<div>
+<h3 class="font-bold">晨间太极</h3>
+<p class="text-xs text-slate-400">花园区</p>
+</div>
+</div>
+<p class="text-slate-700 dark:text-slate-300 mb-4 text-sm leading-relaxed">“与团队一起享受早晨的阳光。今天大家精神都很好！”</p>
+<img alt="Tai Chi Activity" class="w-full h-48 object-cover rounded-2xl mb-4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQknzl77Xp3A5n1ASdXPg5hH83HRCYbVdxP1l8WJrDvEf6V0VMn4c8mRCEZM2UvoXf_Gp-gX8bLWbcUcHAubSVOor8qOLUUIOTtFnuuHZr-FpWJU1NPb2W8ZtnsyH_oH6ViKzLEDymzauGoxpvYHRc6e3-ZGPRhXtrBr3g5Zv6ctbpXoBHqF4K25zRP7kQPQN00rEwxzbH1i_Er4j-ztpbBr-Y4a--xriji_2by2lCkTj9LhT3n9gvyuoVo0dGTt1lWz5tbXh-C26M"/>
+<div class="flex items-center justify-between border-t border-slate-50 dark:border-slate-800 pt-4">
+<div class="flex items-center gap-2 bg-pink-50 dark:bg-pink-900/20 px-3 py-1.5 rounded-full">
+<span class="material-icons-outlined text-pink-500 text-sm">favorite</span>
+<span class="text-xs font-medium text-pink-600">你和其他 2 人</span>
+</div>
+<div class="flex items-center gap-2 bg-slate-50 dark:bg-slate-800 px-3 py-1.5 rounded-full">
+<span class="material-icons-outlined text-slate-400 text-sm">sentiment_satisfied_alt</span>
+<span class="text-xs font-medium text-slate-600 dark:text-slate-400">开心</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-lg border-t border-slate-200 dark:border-slate-800 px-4 pb-8 pt-3 grid grid-cols-5 text-center">
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-icons-outlined text-[24px] text-slate-400 dark:text-slate-500 group-hover:text-primary transition-colors">home</span>
+<span class="text-[10px] font-medium text-slate-400 dark:text-slate-500">首页</span>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-icons-outlined text-[24px] text-slate-400 dark:text-slate-500 group-hover:text-primary transition-colors">bar_chart</span>
+<span class="text-[10px] font-medium text-slate-400 dark:text-slate-500">数据</span>
+</a>
+<a class="flex flex-col items-center gap-1" href="#">
+<span class="material-icons-outlined text-[24px] text-primary">calendar_today</span>
+<span class="text-[10px] font-bold text-primary">动态</span>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<div class="relative">
+<span class="material-icons-outlined text-[24px] text-slate-400 dark:text-slate-500 group-hover:text-primary transition-colors">medical_services</span>
+<span class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-[8px] flex items-center justify-center rounded-full ring-2 ring-background-light dark:ring-background-dark">2</span>
+</div>
+<span class="text-[10px] font-medium text-slate-400 dark:text-slate-500">服务</span>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-icons-outlined text-[24px] text-slate-400 dark:text-slate-500 group-hover:text-primary transition-colors">account_circle</span>
+<span class="text-[10px] font-medium text-slate-400 dark:text-slate-500">我的</span>
+</a>
+</nav>
+<div class="fixed bottom-1 left-1/2 -translate-x-1/2 w-32 h-1 bg-slate-300 dark:bg-slate-700 rounded-full"></div>
+</div>
+
+</body></html>

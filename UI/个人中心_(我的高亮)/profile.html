@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>个人中心 - 轻松智派</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#007AFF",
+                        "background-light": "#F2F2F7",
+                        "background-dark": "#000000",
+                        "card-light": "#FFFFFF",
+                        "card-dark": "#1C1C1E",
+                    },
+                    fontFamily: {
+                        display: ["-apple-system", "BlinkMacSystemFont", "Helvetica Neue", "PingFang SC", "Microsoft YaHei", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "12px",
+                    },
+                },
+            },
+        };
+    </script>
+<style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .ios-toggle:checked + .toggle-bg {
+            background-color: #34C759;
+        }
+        .ios-toggle:checked + .toggle-bg .toggle-dot {
+            transform: translateX(20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white transition-colors duration-200">
+<header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-4 py-3 flex items-center justify-between">
+<button class="p-1">
+<span class="material-icons-outlined text-primary">chevron_left</span>
+</button>
+<h1 class="text-lg font-semibold">家庭设置</h1>
+<button class="text-primary font-medium text-sm">邀请</button>
+</header>
+<main class="px-4 pb-32 space-y-4">
+<section class="bg-card-light dark:bg-card-dark p-5 rounded-2xl shadow-sm flex items-center gap-4">
+<div class="relative">
+<img alt="Senior profile" class="w-16 h-16 rounded-full object-cover border-2 border-white dark:border-gray-800" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnUQsB3OUTdpTNsS-_34kOxWCPFCMdsDqzS-FygQAZUzbfpXM2T4CDHybk1tCJtq0r47W2ZnF4gf0WlmDD0t5jUAbWWJVJ-8ytUdwa8E3JG4CWa72ZVD3Opmv-I8FHKZyO7L0t7tdEN78sqYtzK6HyK_f3qjanH67nnmGchPYrP1CfBc_KDdGtLkTZAAywUsf9tmy8d3u6IhIXI3XnExmNVurzvh9Rn3HBubMACh06ENbiQGffCDbhnidty0f4xQ33rhBLpB8ILB2f"/>
+<div class="absolute bottom-0 right-0 w-4 h-4 bg-green-500 border-2 border-white dark:border-gray-800 rounded-full"></div>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h2 class="text-xl font-bold">张爷爷</h2>
+<span class="text-sm text-slate-500 dark:text-slate-400">82 岁</span>
+</div>
+<div class="mt-1 flex items-center gap-1 bg-blue-50 dark:bg-blue-900/30 px-2 py-0.5 rounded text-[10px] text-primary font-bold">
+<span class="material-icons-outlined text-[12px]">security</span>
+                    监测中
+                </div>
+</div>
+</section>
+<section>
+<div class="flex justify-between items-end mb-2 px-1">
+<div>
+<h3 class="font-bold text-lg">Care Group Members</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400">照护小组成员</p>
+</div>
+<div class="text-right">
+<p class="text-[10px] text-slate-400 uppercase tracking-wider font-semibold">ACCESS LEVEL</p>
+<p class="text-xs text-slate-500">访问权限</p>
+</div>
+</div>
+<div class="space-y-3">
+<div class="bg-card-light dark:bg-card-dark p-4 rounded-2xl shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-3">
+<img alt="Admin avatar" class="w-12 h-12 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKUISQsI73_o-_zUIJ4dg6-mrqsry42pXPfCT22VjB80Ypp_H0_uYFc5w18Z0eDtgdthduawunpbYocasAID4giyOuua1AEUMpY3OhI_F5o3INuJeNj4kjoA-U6Wgw27Y54maZ5JPap09sw9t2sJOYCRuMXpcYY-EM-rX6Psf5ep58EmYZH8wO3vPJysM3RymPKLmjrz3E0Zg36B1SsqALgPtVMwJhRk_dp5PkmYf3uM_i9Tka_YpPYZKRlH6MRHzcWUup3N5PC-Wz"/>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-semibold">您 (管理员)</span>
+<span class="text-[10px] bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded text-slate-500">所有者</span>
+</div>
+<p class="text-xs text-slate-500 mt-0.5">主要联系人</p>
+</div>
+</div>
+<span class="material-icons-outlined text-primary">verified</span>
+</div>
+<div class="bg-card-light dark:bg-card-dark rounded-2xl shadow-sm overflow-hidden">
+<div class="p-4 flex items-center justify-between border-b border-slate-50 dark:border-slate-800">
+<div class="flex items-center gap-3">
+<img alt="Daughter avatar" class="w-12 h-12 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD27kSobmu96bd8iI4Blj43bVTc1Fdz-Yv1rNMMjI4SPACTDLz_snmj1wGqh_xz5qfpIMXNS0HBHIoxmRPqMMwvzrlahlubMVlFsMPlfgbpG4m0Shg3g82Lqus0ErmavMpN8O3eqeMKBgnmRfKSdpWvlYwo6uRk_Ee7VzfTAFK3DvWnaykXS5d-SKYd52PAWWFzHB6hf5nv6kPTsyVJVhZ-fYSBnkSPihR_tmSq1daou2b_lbCwRQ34Pg_Jet71LYFs10E6MszZdTIL"/>
+<div>
+<span class="font-semibold">玛丽 (女儿)</span>
+<p class="text-xs text-slate-500 mt-0.5">照护者</p>
+</div>
+</div>
+<span class="material-icons-outlined text-slate-400">more_vert</span>
+</div>
+<div class="bg-slate-50/50 dark:bg-slate-800/30 p-4 space-y-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-icons-outlined text-slate-500 text-lg">visibility</span>
+<span class="text-sm font-medium">查看健康数据</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only ios-toggle" type="checkbox"/>
+<div class="toggle-bg w-11 h-6 bg-gray-200 dark:bg-gray-700 rounded-full transition-colors">
+<div class="toggle-dot absolute top-[2px] left-[2px] bg-white w-5 h-5 rounded-full transition-transform shadow-sm"></div>
+</div>
+</label>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-icons-outlined text-slate-500 text-lg">shopping_bag</span>
+<span class="text-sm font-medium">管理订单</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only ios-toggle" type="checkbox"/>
+<div class="toggle-bg w-11 h-6 bg-gray-200 dark:bg-gray-700 rounded-full transition-colors">
+<div class="toggle-dot absolute top-[2px] left-[2px] bg-white w-5 h-5 rounded-full transition-transform shadow-sm"></div>
+</div>
+</label>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<button class="flex items-center justify-center gap-2 py-4 border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-2xl text-slate-500 hover:bg-slate-50 transition-colors">
+<span class="material-icons-outlined text-xl">person_add</span>
+<span class="text-sm">邀请新家庭成员</span>
+</button>
+<button class="flex items-center justify-center gap-2 py-4 border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-2xl text-slate-500 hover:bg-slate-50 transition-colors">
+<span class="material-icons-outlined text-xl">person_add</span>
+<span class="text-sm">邀请新家庭成员</span>
+</button>
+</div>
+</div>
+</section>
+<section>
+<h3 class="font-bold text-lg mb-3 px-1">消息通知偏好</h3>
+<div class="bg-card-light dark:bg-card-dark rounded-2xl shadow-sm divide-y divide-slate-50 dark:divide-slate-800">
+<div class="p-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-red-50 dark:bg-red-900/30 rounded-full flex items-center justify-center">
+<span class="material-icons-outlined text-red-500">error</span>
+</div>
+<div>
+<p class="font-semibold text-sm">紧急警报</p>
+<p class="text-xs text-slate-500">跌倒推送与短信</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only ios-toggle" type="checkbox"/>
+<div class="toggle-bg w-11 h-6 bg-gray-200 dark:bg-gray-700 rounded-full transition-colors">
+<div class="toggle-dot absolute top-[2px] left-[2px] bg-white w-5 h-5 rounded-full transition-transform shadow-sm"></div>
+</div>
+</label>
+</div>
+<div class="p-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-blue-50 dark:bg-blue-900/30 rounded-full flex items-center justify-center">
+<span class="material-icons-outlined text-blue-500">medication</span>
+</div>
+<div>
+<p class="font-semibold text-sm">用药提醒</p>
+<p class="text-xs text-slate-500">漏服提醒</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only ios-toggle" type="checkbox"/>
+<div class="toggle-bg w-11 h-6 bg-gray-200 dark:bg-gray-700 rounded-full transition-colors">
+<div class="toggle-dot absolute top-[2px] left-[2px] bg-white w-5 h-5 rounded-full transition-transform shadow-sm"></div>
+</div>
+</label>
+</div>
+<div class="p-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center">
+<span class="material-icons-outlined text-slate-500">description</span>
+</div>
+<div>
+<p class="font-semibold text-sm">每日报告</p>
+<p class="text-xs text-slate-500">晚间 8 点摘要</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only ios-toggle" type="checkbox"/>
+<div class="toggle-bg w-11 h-6 bg-gray-200 dark:bg-gray-700 rounded-full transition-colors">
+<div class="toggle-dot absolute top-[2px] left-[2px] bg-white w-5 h-5 rounded-full transition-transform shadow-sm"></div>
+</div>
+</label>
+</div>
+</div>
+</section>
+<div class="py-4 text-center">
+<button class="text-red-500 text-sm font-medium">解绑账户</button>
+</div>
+</main>
+<nav class="fixed bottom-0 left-0 right-0 bg-card-light/95 dark:bg-card-dark/95 backdrop-blur-lg border-t border-slate-100 dark:border-slate-800 px-2 py-2 pb-6 flex justify-around items-center">
+<button class="flex flex-col items-center gap-1 flex-1">
+<span class="material-icons-outlined text-slate-400">home</span>
+<span class="text-[10px] text-slate-500">首页</span>
+</button>
+<button class="flex flex-col items-center gap-1 flex-1">
+<span class="material-icons-outlined text-slate-400">donut_large</span>
+<span class="text-[10px] text-slate-500">数据</span>
+</button>
+<button class="flex flex-col items-center gap-1 flex-1">
+<span class="material-icons-outlined text-slate-400">explore</span>
+<span class="text-[10px] text-slate-500">动态</span>
+</button>
+<button class="flex flex-col items-center gap-1 flex-1">
+<span class="material-icons-outlined text-slate-400">grid_view</span>
+<span class="text-[10px] text-slate-500">服务</span>
+</button>
+<button class="flex flex-col items-center gap-1 flex-1">
+<span class="material-icons-outlined text-primary">person</span>
+<span class="text-[10px] text-primary font-medium">我的</span>
+</button>
+</nav>
+<div class="fixed bottom-1 left-1/2 -translate-x-1/2 w-32 h-1 bg-slate-300 dark:bg-slate-700 rounded-full"></div>
+
+</body></html>

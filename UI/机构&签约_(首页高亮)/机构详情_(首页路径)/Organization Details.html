@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>机构详情</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#007AFF",
+                        "background-light": "#F2F2F7",
+                        "background-dark": "#1C1C1E",
+                        "card-light": "#FFFFFF",
+                        "card-dark": "#2C2C2E",
+                    },
+                    fontFamily: {
+                        display: ["SF Pro Text", "PingFang SC", "system-ui", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "12px",
+                    },
+                },
+            },
+        };
+    </script>
+<style>
+        body {
+            -webkit-tap-highlight-color: transparent;
+            font-family: 'SF Pro Text', 'PingFang SC', system-ui, sans-serif;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen pb-40">
+<header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-4 h-11 flex items-center justify-between">
+<button class="p-2 -ml-2">
+<span class="material-icons-outlined text-xl">arrow_back_ios</span>
+</button>
+<h1 class="text-lg font-semibold">机构详情</h1>
+<button class="p-2 -mr-2">
+<span class="material-icons-outlined text-xl">share</span>
+</button>
+</header>
+<main class="px-4 space-y-6">
+<section class="mt-2 relative rounded-3xl overflow-hidden aspect-[4/3] bg-gradient-to-br from-orange-200 to-orange-400 dark:from-orange-900 dark:to-orange-700">
+<img alt="机构实景" class="w-full h-full object-cover opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3HJkS1zJECYh7QA79v7NgoJQoKN-fIykn4E5HQnlchUUNBw_X3X7R_wh3rJsowz5Ivp5VEX9-IEkd1KpRHT7k52gzeei7SBB7GMqaSOX8YJ-zR7mgsqrvV19QhpPEDKQuclkPhMJlI7zBOFCKC85xnQQgFDU8Iw6Sc3rLJqNNgZ-pY6khI-Pu7K6yVPW8shz9vF2SJ6KLcGGFyNxvDTdxdWjXVIIEKbDVovgOlPyD1eJe3fQbWC0zM4E78Y4EMQShm_Yzr65B1OXG"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="bg-white/20 backdrop-blur-md border border-white/30 rounded-full px-6 py-3 flex flex-col items-center">
+<span class="material-icons-outlined text-white text-3xl">360</span>
+<span class="text-white text-sm font-medium">进入VR全景</span>
+</div>
+</div>
+<div class="absolute bottom-4 left-4 flex gap-2">
+<span class="bg-green-500 text-white text-[10px] px-2 py-0.5 rounded-full flex items-center gap-1">
+<span class="material-icons-outlined text-[12px]">verified</span>已认证
+                </span>
+<span class="bg-blue-500 text-white text-[10px] px-2 py-0.5 rounded-full">支持VR</span>
+</div>
+</section>
+<section>
+<h2 class="text-2xl font-bold mb-1">阳光颐养中心</h2>
+<div class="flex items-center text-slate-500 dark:text-slate-400 text-sm mb-4">
+<span class="material-icons-outlined text-sm mr-1">location_on</span>
+                北京市, 朝阳区
+            </div>
+<div class="grid grid-cols-2 gap-3">
+<div class="bg-card-light dark:bg-card-dark p-4 rounded-2xl">
+<div class="text-xs text-slate-400 mb-1">起始价格</div>
+<div class="text-primary font-bold text-lg">¥5000<span class="text-sm font-normal text-slate-400">/月</span></div>
+</div>
+<div class="bg-card-light dark:bg-card-dark p-4 rounded-2xl">
+<div class="text-xs text-slate-400 mb-1">照护类型</div>
+<div class="font-bold text-slate-800 dark:text-slate-200">协助照护与康复</div>
+</div>
+</div>
+</section>
+<section>
+<div class="flex justify-between items-center mb-4">
+<h3 class="text-xl font-bold">服务与照护</h3>
+<button class="text-primary text-sm">查看全部</button>
+</div>
+<div class="space-y-3">
+<div class="bg-card-light dark:bg-card-dark p-4 rounded-2xl flex gap-4">
+<div class="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center">
+<span class="material-icons-outlined text-primary">monitor_heart</span>
+</div>
+<div class="flex-1">
+<h4 class="font-bold mb-1">康复中心</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                            为术后提供专业康复中心，促进术后适应，针对性康复训练。
+                        </p>
+<div class="flex gap-2 mt-2">
+<span class="text-[10px] px-2 py-0.5 bg-slate-100 dark:bg-slate-800 rounded-full">理疗</span>
+<span class="text-[10px] px-2 py-0.5 bg-slate-100 dark:bg-slate-800 rounded-full">言语治疗</span>
+</div>
+</div>
+</div>
+<div class="bg-card-light dark:bg-card-dark p-4 rounded-2xl flex gap-4">
+<div class="w-12 h-12 rounded-xl bg-orange-50 dark:bg-orange-900/30 flex items-center justify-center">
+<span class="material-icons-outlined text-orange-500">restaurant</span>
+</div>
+<div class="flex-1">
+<h4 class="font-bold mb-1">营养膳食</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                            定制低糖低盐，全面营养食谱搭配。确保膳食健康。
+                        </p>
+<div class="flex gap-2 mt-2">
+<span class="text-[10px] px-2 py-0.5 bg-slate-100 dark:bg-slate-800 rounded-full">低糖糖尿病</span>
+<span class="text-[10px] px-2 py-0.5 bg-slate-100 dark:bg-slate-800 rounded-full">送餐服务</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section>
+<div class="flex justify-between items-center mb-4">
+<h3 class="text-xl font-bold">评价 <span class="text-sm font-normal text-slate-400 ml-1">128 条评价</span></h3>
+<button class="text-primary text-sm">查看全部</button>
+</div>
+<div class="bg-card-light dark:bg-card-dark p-4 rounded-2xl flex items-center mb-4">
+<div class="text-center pr-6 border-r border-slate-100 dark:border-slate-800">
+<div class="text-3xl font-bold">4.8</div>
+<div class="flex text-orange-400 scale-75 -mx-2">
+<span class="material-icons-outlined text-sm">star</span>
+<span class="material-icons-outlined text-sm">star</span>
+<span class="material-icons-outlined text-sm">star</span>
+<span class="material-icons-outlined text-sm">star</span>
+<span class="material-icons-outlined text-sm">star_half</span>
+</div>
+<div class="text-[10px] text-slate-400 mt-1">128 条评价</div>
+</div>
+<div class="flex-1 pl-6 space-y-1">
+<div class="flex items-center gap-2">
+<span class="text-[10px] text-slate-400 w-2">5</span>
+<div class="flex-1 h-1 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[85%]"></div>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[10px] text-slate-400 w-2">4</span>
+<div class="flex-1 h-1 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[10%]"></div>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[10px] text-slate-400 w-2">3</span>
+<div class="flex-1 h-1 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[3%]"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-card-light dark:bg-card-dark p-4 rounded-2xl">
+<div class="flex justify-between items-start mb-3">
+<div class="flex gap-3">
+<div class="w-10 h-10 rounded-full bg-slate-200 overflow-hidden">
+<img alt="用户头像" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvbI_7ORvvaNNXzPorB2ZUuwxzE29K2mWfU8zCVG7IivtJddZkK40Lm0EoLxXQNhfqXIsS5upt7mu4u3ZTjSvX8TqG-vng2GOyDt9RI6OVSN82qMtL-XmMKr7knY7bGE8aNQwNL3H_Dw68hNYhw3DdPdVIPm08Qr2sRfmAeImpZkTXvZzGH-oVVdQbQcQkz7kRulGlBGrfkBVYiHlhqrpgh9uH0-eTTO8EBOauolnBnCveFAJ8NdaAn0ANY9Ymuv5oOUsZ20lCHIzj"/>
+</div>
+<div>
+<div class="font-bold text-sm">张先生</div>
+<div class="text-[10px] text-slate-400">亲属 · 入住2年</div>
+</div>
+</div>
+<div class="text-[10px] text-slate-400">2天前</div>
+</div>
+<div class="flex text-orange-400 mb-2">
+<span class="material-icons-outlined text-xs">star</span>
+<span class="material-icons-outlined text-xs">star</span>
+<span class="material-icons-outlined text-xs">star</span>
+<span class="material-icons-outlined text-xs">star</span>
+<span class="material-icons-outlined text-xs">star</span>
+</div>
+<p class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed mb-3">
+                    我父亲很喜欢这里的花园。工作人员非常有耐心，帮助他重新走路。
+                </p>
+<div class="flex gap-2">
+<img alt="评论图片" class="w-20 h-20 rounded-lg object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDs4K8AaKcEYNanxDjiOz0FKFPj87N3Od2iTXNwIN0yrlO2GeOgOmPIGjr5CakpwOttN31L-K2Zf5ZodIemKW8qq63rKuZsWcl5KGBwUMUDFnmKBTLXzrIfvPmAxu862oLEbAgf25GybI2HwgHVrExEvq2yG5b8vjulruAai5FYUCGk-nTTn4j6YqWJiJI6atoiR8WD7XY-dt-IF97IqL9cTpV1H5-FzOAsn-sEVOTFEnWCv2P9d5MMy-8dcEARKg2-_m27AKHTC2bD"/>
+<img alt="评论图片" class="w-20 h-20 rounded-lg object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxwfw-2SLV4gu2HTNyGlP8bVt3Y7b5Yfb685RDjy5YWG1k5_1-HmFCLL4L3litvwDIASRNeOG5dyyvsYx3VGN_OuFww7jfxUsQ2n0gJeR1dXTkqWG3bdTKcDrmQTmNTTgKlLc65Dfw7jNgl39XdqJ47b3qxFNZ3GwRELBA7K8QE4Z6qn4H70MdbbviQmKSK8xzSHj30QgxqYboTBSACz0ObF0aOPNJKNE7aC5-tjAMD_cX99vchbBofy8jrPWo1rr9FvwOxLAw6NyC"/>
+</div>
+</div>
+</section>
+</main>
+<div class="fixed bottom-[83px] left-0 right-0 px-4 py-3 bg-white/80 dark:bg-black/80 backdrop-blur-xl border-t border-slate-100 dark:border-slate-800 flex gap-3 z-40">
+<button class="flex-1 py-3 px-4 border border-primary text-primary rounded-full font-bold flex items-center justify-center gap-2">
+<span class="material-icons-outlined text-lg">phone_in_talk</span>
+            一键咨询
+        </button>
+<button class="flex-1 py-3 px-4 bg-primary text-white rounded-full font-bold flex items-center justify-center gap-2">
+<span class="material-icons-outlined text-lg">edit_calendar</span>
+            在线签约
+        </button>
+</div>
+<nav class="fixed bottom-0 left-0 right-0 bg-white dark:bg-black border-t border-slate-100 dark:border-slate-800 px-2 pt-2 pb-6 flex justify-around z-50">
+<button class="flex flex-col items-center gap-1 w-1/5 text-primary">
+<span class="material-icons-outlined">home</span>
+<span class="text-[10px] font-medium">首页</span>
+</button>
+<button class="flex flex-col items-center gap-1 w-1/5 text-slate-400">
+<span class="material-icons-outlined">bar_chart</span>
+<span class="text-[10px] font-medium">数据</span>
+</button>
+<button class="flex flex-col items-center gap-1 w-1/5 text-slate-400">
+<span class="material-icons-outlined">explore</span>
+<span class="text-[10px] font-medium">动态</span>
+</button>
+<button class="flex flex-col items-center gap-1 w-1/5 text-slate-400">
+<span class="material-icons-outlined">category</span>
+<span class="text-[10px] font-medium">服务</span>
+</button>
+<button class="flex flex-col items-center gap-1 w-1/5 text-slate-400">
+<span class="material-icons-outlined">person_outline</span>
+<span class="text-[10px] font-medium">我的</span>
+</button>
+</nav>
+
+</body></html>

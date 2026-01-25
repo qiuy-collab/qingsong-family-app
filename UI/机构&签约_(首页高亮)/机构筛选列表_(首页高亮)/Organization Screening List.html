@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>机构筛选列表 - 青松护家</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#3491FA", // Qingsong Blue
+                        "background-light": "#F7F8FA",
+                        "background-dark": "#121212",
+                        "surface-light": "#FFFFFF",
+                        "surface-dark": "#1E1E1E",
+                    },
+                    fontFamily: {
+                        display: ["Inter", "PingFang SC", "Microsoft YaHei", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "12px",
+                    },
+                },
+            },
+        };
+    </script>
+<style>
+        .material-symbols-rounded {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<header class="sticky top-0 z-50 bg-background-light dark:bg-background-dark px-4 py-3 flex items-center justify-between">
+<button class="p-2 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-full transition-colors">
+<span class="material-symbols-rounded block">chevron_left</span>
+</button>
+<h1 class="text-lg font-bold">寻找照护</h1>
+<button class="p-2 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-full transition-colors">
+<span class="material-symbols-rounded block text-primary">map</span>
+</button>
+</header>
+<main class="flex-1 pb-24">
+<div class="px-4 mb-4">
+<div class="relative flex items-center">
+<span class="material-symbols-rounded absolute left-4 text-slate-400">search</span>
+<input class="w-full bg-surface-light dark:bg-surface-dark border-none rounded-full py-3 pl-12 pr-4 shadow-sm focus:ring-2 focus:ring-primary text-sm" placeholder="按名称或地点搜索" type="text"/>
+</div>
+</div>
+<div class="flex gap-3 px-4 mb-6 overflow-x-auto no-scrollbar">
+<button class="bg-primary text-white px-5 py-1.5 rounded-full text-sm font-medium whitespace-nowrap">全部</button>
+<button class="bg-surface-light dark:bg-surface-dark border border-slate-100 dark:border-slate-800 px-4 py-1.5 rounded-full text-sm flex items-center gap-1 whitespace-nowrap">
+                护理级别 <span class="material-symbols-rounded text-xs">keyboard_arrow_down</span>
+</button>
+<button class="bg-surface-light dark:bg-surface-dark border border-slate-100 dark:border-slate-800 px-4 py-1.5 rounded-full text-sm flex items-center gap-1 whitespace-nowrap">
+                医疗保险 <span class="material-symbols-rounded text-xs">keyboard_arrow_down</span>
+</button>
+</div>
+<div class="px-4 space-y-4">
+<div class="bg-surface-light dark:bg-surface-dark rounded-2xl overflow-hidden shadow-sm border border-slate-100 dark:border-slate-800">
+<div class="relative h-48">
+<img alt="阳光花园养老生活" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAH3eI4uk0YhTtb7bheudq0C591btSsy0wBHOpBEr1gCmAljktBISFAGAMUHyoHdP2mrWnQB3DL9pF2QD5dqGBMgzeHpAeIqzMzmV8_4Jz-FQzVwGl_4Wq5IZBCJpYCpz0MamraUJAC3kRb7TvPo64IP0vj08hKzpQWXueuRUxLi8P1XCOuNwiH1cBSnTmo8CXFIj93eypY_Jhyl79QVCkFe83ov5MVxmlq1u5hkTHDymGYk2LYFHwu2z5koHDJ1vjkPf_RU2Jtqd9f"/>
+<div class="absolute top-3 left-3 bg-white/90 dark:bg-black/80 backdrop-blur-sm px-2 py-1 rounded-full flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-green-500"></span>
+<span class="text-[10px] font-bold text-green-600 dark:text-green-400">床位: 3</span>
+</div>
+<button class="absolute top-3 right-3 text-white drop-shadow-md">
+<span class="material-symbols-rounded">favorite</span>
+</button>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-1">
+<h3 class="text-lg font-bold">阳光花园养老生活</h3>
+<div class="flex items-center gap-1 bg-yellow-50 dark:bg-yellow-900/30 px-2 py-0.5 rounded-md">
+<span class="material-symbols-rounded text-yellow-500 text-xs">star</span>
+<span class="text-xs font-bold text-yellow-700 dark:text-yellow-400">4.9</span>
+<span class="text-[10px] text-slate-400">(120)</span>
+</div>
+</div>
+<p class="text-xs text-slate-500 mb-3">床位: 3</p>
+<div class="flex gap-2 mb-4">
+<span class="px-2 py-1 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 text-[10px] rounded">专业护理</span>
+<span class="px-2 py-1 bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400 text-[10px] rounded">康复</span>
+<span class="px-2 py-1 bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 text-[10px] rounded">医疗保险</span>
+</div>
+<hr class="border-slate-100 dark:border-slate-800 mb-3"/>
+<div class="flex justify-between items-center">
+<div class="flex items-center text-slate-400 gap-1">
+<span class="material-symbols-rounded text-sm">location_on</span>
+<span class="text-xs">2.5公里外</span>
+</div>
+<div class="text-primary font-bold">
+<span class="text-sm">¥</span><span class="text-lg">5,200</span><span class="text-xs text-slate-400 font-normal">/月</span>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-2xl overflow-hidden shadow-sm border border-slate-100 dark:border-slate-800">
+<div class="relative h-48">
+<img alt="青松社区中心" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAScOX2CQzCqgk_MktHp7li_uDneU1toZiX4EQJsrtwiMgeLtS0tuUlgvp-CM2_byK_lIKN-24hTFs2LQJbNeU6OhAaBvBTeBAHCWwIUNuDcLMX892m5J79hshhUkiY0i4VsoxnkoN0IUrN0q5E_S0vnAUGEEvKd42KCOztss9ON4y0kGSewwtumZfN0mumiZwjJKPy2NpF918XZLJro0j3uXJwavY48wGl0HQvRXy1nt6I5w41W_TFNcz8Of5PV3Ul8FDvrZkwtZga"/>
+<div class="absolute top-3 left-3 bg-white/90 dark:bg-black/80 backdrop-blur-sm px-2 py-1 rounded-full flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-orange-500"></span>
+<span class="text-[10px] font-bold text-orange-600 dark:text-orange-400">床位: 1</span>
+</div>
+<button class="absolute top-3 right-3 text-white drop-shadow-md">
+<span class="material-symbols-rounded">favorite</span>
+</button>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-1">
+<h3 class="text-lg font-bold">青松社区中心</h3>
+<div class="flex items-center gap-1 bg-yellow-50 dark:bg-yellow-900/30 px-2 py-0.5 rounded-md">
+<span class="material-symbols-rounded text-yellow-500 text-xs">star</span>
+<span class="text-xs font-bold text-yellow-700 dark:text-yellow-400">4.7</span>
+<span class="text-[10px] text-slate-400">(85)</span>
+</div>
+</div>
+<p class="text-xs text-slate-500 mb-3">床位: 1</p>
+<div class="flex gap-2 mb-4">
+<span class="px-2 py-1 bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400 text-[10px] rounded">协助生活</span>
+<span class="px-2 py-1 bg-pink-50 dark:bg-pink-900/20 text-pink-600 dark:text-pink-400 text-[10px] rounded">活动</span>
+</div>
+<hr class="border-slate-100 dark:border-slate-800 mb-3"/>
+<div class="flex justify-between items-center">
+<div class="flex items-center text-slate-400 gap-1">
+<span class="material-symbols-rounded text-sm">location_on</span>
+<span class="text-xs">5.0公里外</span>
+</div>
+<div class="text-primary font-bold">
+<span class="text-sm">¥</span><span class="text-lg">3,800</span><span class="text-xs text-slate-400 font-normal">/月</span>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-2xl overflow-hidden shadow-sm border border-slate-100 dark:border-slate-800">
+<div class="relative h-48">
+<img alt="金色年华疗养院" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPhOiX59X9lzxLUKWEITS1BlgAbc7DjWV6F7iTRgLC9hSTJza0WVMTjvnkanOqqsCWyJ5f5kRIwxXcjwkUH8Bvug4xG2yfzt_XKVydQgZwUrsFad9G3TccjDS8uXH3dPBeITZRxjKSCF5dnfHFuO87Wd-P26hvi1cAsidk8oZbvsMtmNCEPjaPvEA20plI1bvDgiZJ8Uz90yp5JExmjfEL1c0h9tJUUVwIW6CyFgjfoBe0KMNkuraUGM36o7koacKQ4hFnVf0PcAJ_"/>
+<div class="absolute top-3 left-3 bg-white/90 dark:bg-black/80 backdrop-blur-sm px-2 py-1 rounded-full flex items-center gap-1">
+<span class="material-symbols-rounded text-xs text-orange-500">schedule</span>
+<span class="text-[10px] font-bold text-orange-600 dark:text-orange-400">排队中</span>
+</div>
+<button class="absolute top-3 right-3 text-white drop-shadow-md">
+<span class="material-symbols-rounded">favorite</span>
+</button>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-1">
+<h3 class="text-lg font-bold">金色年华疗养院</h3>
+<div class="flex items-center gap-1 bg-yellow-50 dark:bg-yellow-900/30 px-2 py-0.5 rounded-md">
+<span class="material-symbols-rounded text-yellow-500 text-xs">star</span>
+<span class="text-xs font-bold text-yellow-700 dark:text-yellow-400">4.5</span>
+<span class="text-[10px] text-slate-400">(42)</span>
+</div>
+</div>
+<p class="text-xs text-slate-500 mb-3">排队人数较多</p>
+<div class="flex gap-2 mb-4">
+<span class="px-2 py-1 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 text-[10px] rounded">记忆护理</span>
+<span class="px-2 py-1 bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 text-[10px] rounded">医疗保险</span>
+</div>
+<hr class="border-slate-100 dark:border-slate-800 mb-3"/>
+<div class="flex justify-between items-center">
+<div class="flex items-center text-slate-400 gap-1">
+<span class="material-symbols-rounded text-sm">location_on</span>
+<span class="text-xs">12.3公里外</span>
+</div>
+<div class="text-primary font-bold">
+<span class="text-sm">¥</span><span class="text-lg">6,500</span><span class="text-xs text-slate-400 font-normal">/月</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<nav class="fixed bottom-0 left-0 right-0 bg-white/90 dark:bg-black/90 backdrop-blur-md border-t border-slate-100 dark:border-slate-800 px-2 pt-2 pb-safe flex justify-around items-center">
+<a class="flex flex-col items-center gap-0.5 px-4 py-1 text-primary" href="#">
+<span class="material-symbols-rounded">home</span>
+<span class="text-[10px] font-medium">首页</span>
+</a>
+<a class="flex flex-col items-center gap-0.5 px-4 py-1 text-slate-400 dark:text-slate-500 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-rounded">bar_chart</span>
+<span class="text-[10px] font-medium">数据</span>
+</a>
+<a class="flex flex-col items-center gap-0.5 px-4 py-1 text-slate-400 dark:text-slate-500 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-rounded">notifications</span>
+<span class="text-[10px] font-medium">动态</span>
+</a>
+<a class="flex flex-col items-center gap-0.5 px-4 py-1 text-slate-400 dark:text-slate-500 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-rounded">medical_services</span>
+<span class="text-[10px] font-medium">服务</span>
+</a>
+<a class="flex flex-col items-center gap-0.5 px-4 py-1 text-slate-400 dark:text-slate-500 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-rounded">person</span>
+<span class="text-[10px] font-medium">我的</span>
+</a>
+</nav>
+
+</body></html>

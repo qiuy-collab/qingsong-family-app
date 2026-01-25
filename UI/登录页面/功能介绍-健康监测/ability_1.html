@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>功能介绍 - 健康监测</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2b8cee",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Lexend', "Noto Sans SC", sans-serif;
+        }
+        .chart-gradient-bg {
+            background: linear-gradient(180deg, rgba(43, 141, 238, 0.1) 0%, rgba(43, 141, 238, 0) 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col">
+<!-- Header / Top Bar -->
+<div class="flex items-center bg-transparent p-4 justify-between">
+<div class="text-[#0d141b] dark:text-white flex size-12 shrink-0 items-center">
+<span class="material-symbols-outlined cursor-pointer">arrow_back_ios</span>
+</div>
+<div class="flex-1 text-center pr-12">
+<span class="text-slate-400 text-sm font-medium tracking-widest uppercase">Step 2 of 3</span>
+</div>
+</div>
+<!-- Page Indicators -->
+<div class="flex w-full flex-row items-center justify-center gap-3 py-2">
+<div class="h-1.5 w-6 rounded-full bg-[#cfdbe7] dark:bg-slate-700"></div>
+<div class="h-1.5 w-10 rounded-full bg-primary"></div>
+<div class="h-1.5 w-6 rounded-full bg-[#cfdbe7] dark:bg-slate-700"></div>
+</div>
+<!-- Headline Content -->
+<div class="px-6 pt-8 pb-4">
+<h2 class="text-[#0d141b] dark:text-white tracking-tight text-[28px] font-bold leading-tight text-center">
+            实时数据，随时掌控健康状态
+        </h2>
+<p class="text-slate-500 dark:text-slate-400 text-base font-normal leading-normal pt-3 text-center">
+            专业医疗级监测，科技守护长辈健康
+        </p>
+</div>
+<!-- Main Visuals Container -->
+<div class="flex-1 flex flex-col gap-6 px-6 py-4 overflow-y-auto">
+<!-- Heart Rate Card -->
+<div class="bg-white dark:bg-slate-800/50 p-6 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700">
+<div class="flex justify-between items-start mb-4">
+<div>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium mb-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-rose-500 text-lg">favorite</span>
+                        实时心率 (BPM)
+                    </p>
+<div class="flex items-baseline gap-2">
+<p class="text-[#0d141b] dark:text-white tracking-tight text-4xl font-bold">75</p>
+<span class="text-emerald-500 text-sm font-semibold flex items-center">
+<span class="material-symbols-outlined text-sm">trending_up</span> 正常
+                        </span>
+</div>
+</div>
+<div class="bg-primary/10 p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary">monitor_heart</span>
+</div>
+</div>
+<!-- Pulse Line Chart -->
+<div class="relative h-24 w-full mt-4">
+<svg fill="none" height="100%" preserveaspectratio="none" viewbox="0 0 478 150" width="100%" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 109C18.1538 109 18.1538 21 36.3077 21C54.4615 21 54.4615 41 72.6154 41C90.7692 41 90.7692 93 108.923 93C127.077 93 127.077 33 145.231 33C163.385 33 163.385 101 181.538 101C199.692 101 199.692 61 217.846 61C236 61 236 45 254.154 45C272.308 45 272.308 121 290.462 121C308.615 121 308.615 149 326.769 149C344.923 149 344.923 1 363.077 1C381.231 1 381.231 81 399.385 81C417.538 81 417.538 129 435.692 129C453.846 129 453.846 25 472 25" stroke="#2b8cee" stroke-linecap="round" stroke-width="4"></path>
+<path d="M0 109C18.1538 109 18.1538 21 36.3077 21C54.4615 21 54.4615 41 72.6154 41C90.7692 41 90.7692 93 108.923 93C127.077 93 127.077 33 145.231 33C163.385 33 163.385 101 181.538 101C199.692 101 199.692 61 217.846 61C236 61 236 45 254.154 45C272.308 45 272.308 121 290.462 121C308.615 121 308.615 149 326.769 149C344.923 149 344.923 1 363.077 1C381.231 1 381.231 81 399.385 81C417.538 81 417.538 129 435.692 129C453.846 129 453.846 25 472 25V149H326.769H0V109Z" fill="url(#paint0_linear)"></path>
+<defs>
+<lineargradient gradientunits="userSpaceOnUse" id="paint0_linear" x1="236" x2="236" y1="1" y2="149">
+<stop stop-color="#2b8cee" stop-opacity="0.2"></stop>
+<stop offset="1" stop-color="#2b8cee" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+</svg>
+</div>
+<div class="flex justify-between mt-2">
+<p class="text-slate-400 text-[11px] font-bold tracking-wider">10:00</p>
+<p class="text-slate-400 text-[11px] font-bold tracking-wider">10:15</p>
+<p class="text-slate-400 text-[11px] font-bold tracking-wider">10:30</p>
+<p class="text-slate-400 text-[11px] font-bold tracking-wider">10:45</p>
+</div>
+</div>
+<!-- Weekly Trend Card -->
+<div class="bg-white dark:bg-slate-800/50 p-6 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700">
+<div class="flex justify-between items-start mb-6">
+<div>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium mb-1">周健康趋势</p>
+<p class="text-[#0d141b] dark:text-white tracking-tight text-2xl font-bold">稳步提升</p>
+</div>
+<div class="flex flex-col items-end">
+<p class="text-emerald-500 text-base font-bold leading-normal">+5.2%</p>
+<p class="text-slate-400 text-[10px] uppercase font-bold tracking-tighter">vs last week</p>
+</div>
+</div>
+<!-- Bar Chart -->
+<div class="grid grid-flow-col gap-3 h-32 items-end justify-items-center">
+<div class="flex flex-col items-center w-full gap-2">
+<div class="bg-primary/20 rounded-t-md w-full" style="height: 40%;"></div>
+<p class="text-slate-400 text-[10px] font-bold">周一</p>
+</div>
+<div class="flex flex-col items-center w-full gap-2">
+<div class="bg-primary/20 rounded-t-md w-full" style="height: 60%;"></div>
+<p class="text-slate-400 text-[10px] font-bold">周二</p>
+</div>
+<div class="flex flex-col items-center w-full gap-2">
+<div class="bg-primary/20 rounded-t-md w-full" style="height: 35%;"></div>
+<p class="text-slate-400 text-[10px] font-bold">周三</p>
+</div>
+<div class="flex flex-col items-center w-full gap-2">
+<div class="bg-primary/40 rounded-t-md w-full border-t-2 border-primary" style="height: 85%;"></div>
+<p class="text-primary text-[10px] font-black">今日</p>
+</div>
+<div class="flex flex-col items-center w-full gap-2">
+<div class="bg-slate-100 dark:bg-slate-700 rounded-t-md w-full" style="height: 45%;"></div>
+<p class="text-slate-400 text-[10px] font-bold">周五</p>
+</div>
+<div class="flex flex-col items-center w-full gap-2">
+<div class="bg-slate-100 dark:bg-slate-700 rounded-t-md w-full" style="height: 55%;"></div>
+<p class="text-slate-400 text-[10px] font-bold">周六</p>
+</div>
+<div class="flex flex-col items-center w-full gap-2">
+<div class="bg-slate-100 dark:bg-slate-700 rounded-t-md w-full" style="height: 50%;"></div>
+<p class="text-slate-400 text-[10px] font-bold">周日</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Action Area -->
+<div class="p-6 pb-12">
+<button class="w-full bg-primary hover:bg-primary/90 text-white text-lg font-bold py-4 rounded-xl shadow-lg transition-colors flex items-center justify-center gap-2">
+            下一步
+            <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<p class="mt-4 text-center text-slate-400 text-sm font-medium cursor-pointer">
+            跳过介绍
+        </p>
+</div>
+<!-- Decorative background elements -->
+<div class="fixed top-0 right-0 -z-10 opacity-10 pointer-events-none">
+<svg height="300" viewbox="0 0 200 200" width="300" xmlns="http://www.w3.org/2000/svg">
+<path d="M44.7,-76.4C58.1,-69.2,69.2,-58.1,77.4,-44.7C85.5,-31.3,90.7,-15.7,90.2,-0.3C89.7,15,83.5,30,74.5,43.4C65.5,56.8,53.7,68.6,40.1,76C26.5,83.4,11.2,86.5,-3.8,92.5C-18.8,98.5,-37.6,107.4,-51.7,100.2C-65.8,93,-75.2,69.7,-82.4,50.1C-89.6,30.5,-94.6,14.6,-92.3,0.3C-90,-14.1,-80.4,-26.8,-70.6,-38.2C-60.8,-49.6,-50.8,-59.7,-39.3,-68.2C-27.8,-76.7,-14.9,-83.6,1.1,-85.4C17.1,-87.3,34.2,-84.1,44.7,-76.4Z" fill="#2b8cee" transform="translate(100 100)"></path>
+</svg>
+</div>
+</body></html>

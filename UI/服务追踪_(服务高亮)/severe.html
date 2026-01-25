@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>服务追踪 - 轻松致派</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#3B82F6", // Qingsong Blue
+                        "background-light": "#F8FAFC",
+                        "background-dark": "#0F172A",
+                        "card-light": "#FFFFFF",
+                        "card-dark": "#1E293B",
+                    },
+                    fontFamily: {
+                        display: ["Inter", "PingFang SC", "Microsoft YaHei", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "16px",
+                    },
+                },
+            },
+        };
+    </script>
+<style>
+        body { font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif; }
+        .timeline-line { position: absolute; left: 19px; top: 24px; bottom: -24px; width: 2px; }
+        .last-item .timeline-line { display: none; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24 }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen pb-32">
+<header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-4 py-4 flex items-center justify-between">
+<button class="p-2 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-full transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="text-lg font-bold">服务追踪详情</h1>
+<div class="w-10"></div> 
+</header>
+<main class="px-4 space-y-4">
+<div class="bg-card-light dark:bg-card-dark p-5 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-800">
+<div class="flex justify-between items-start mb-4">
+<div class="space-y-1">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 bg-blue-50 dark:bg-blue-900/30 text-primary text-xs font-semibold rounded">进行中</span>
+<span class="text-slate-400 text-xs">2023年10月24日</span>
+</div>
+<h2 class="text-xl font-bold">每日康复护理</h2>
+<p class="text-slate-500 dark:text-slate-400 text-sm">全面的下肢康复治疗课程</p>
+</div>
+<div class="w-12 h-12 bg-teal-50 dark:bg-teal-900/30 rounded-2xl flex items-center justify-center">
+<span class="material-symbols-outlined text-teal-500">elderly</span>
+</div>
+</div>
+<div class="w-full bg-slate-100 dark:bg-slate-700 h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-2/3 rounded-full"></div>
+</div>
+</div>
+<div class="bg-card-light dark:bg-card-dark p-4 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-800 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-blue-100 dark:bg-blue-900/50">
+<img alt="Nurse avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIscTv2Uy8aT7jEZoyRkELdYzMfpQqm3YuNhjSOajF5HHDAvADVpfYlpwAMw4KljUgnSxR2dyVGJ5tdAnonl6wSZLxNoU3et88J3-AnYdQ_fft8d0-wdjDk9UC62LKM5g2snZEKKgq72Blo5HL0OFVhV-x-wC8jem66MKf3Cv8VHnoIBXUKTBOMZ-oIPEhU7vu3-GxPBW2mi5RXhZ-Pgxw6qm5BrtH2VzUCuoerSAEw5JX4TEQZBiISSDeKEMTamJ93Ao_Slk1MP3X"/>
+</div>
+<div>
+<h3 class="font-bold text-base">李护士</h3>
+<p class="text-slate-500 dark:text-slate-400 text-xs">高级康复专家</p>
+</div>
+</div>
+<button class="w-10 h-10 bg-blue-50 dark:bg-blue-900/30 text-primary rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined">call</span>
+</button>
+</div>
+<div class="pt-2">
+<div class="flex justify-between items-center mb-4 px-1">
+<h2 class="text-lg font-bold">服务日志</h2>
+<span class="text-slate-400 text-xs">实时更新</span>
+</div>
+<div class="space-y-0 relative">
+<div class="relative pl-12 pb-8">
+<div class="timeline-line bg-slate-200 dark:bg-slate-700"></div>
+<div class="absolute left-0 top-0 w-10 h-10 flex items-center justify-center">
+<div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center ring-4 ring-white dark:ring-background-dark">
+<span class="material-symbols-outlined text-white text-[16px]">check</span>
+</div>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<h4 class="font-bold">到达并签到</h4>
+<p class="text-slate-500 dark:text-slate-400 text-sm mt-1 leading-relaxed">护理员已到达住所。体温检测正常。</p>
+</div>
+<span class="text-slate-400 text-xs mt-1">上午 08:00</span>
+</div>
+</div>
+<div class="relative pl-12 pb-8">
+<div class="timeline-line bg-slate-200 dark:bg-slate-700"></div>
+<div class="absolute left-0 top-0 w-10 h-10 flex items-center justify-center">
+<div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center ring-4 ring-white dark:ring-background-dark">
+<span class="material-symbols-outlined text-white text-[16px]">check</span>
+</div>
+</div>
+<div class="flex justify-between items-start">
+<div class="w-full">
+<h4 class="font-bold">早餐协助</h4>
+<p class="text-slate-500 dark:text-slate-400 text-sm mt-1 mb-3">协助进行均衡饮食摄入。</p>
+<div class="rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-800 max-w-[240px]">
+<img alt="Breakfast meal" class="w-full aspect-video object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1SFr3kPOKXYNuWZsC8A79rXBXJXGxN2yhsSSRdNxOSUzjJ49vvTFtEmUBd3UmXBSkaRLLZSkN-gKLSoC6TVyD4SpEcHUh0UBVBXa9rjxAJsB8b_1KlsI1T9uMNOkncoFZEngz9Jo-AZ1jolhcbJCT4hK_o4nBodk0DrlM3X5sQhYUcCGfS1Hzw9dcmYabnbgeTjSXCuMHRnEmyUpnvUeLQc1gLQgb1PsoEFQoLOZng1bUxRNZHdstSNtF1II4wmMB4pQG8HLJTpcQ"/>
+</div>
+</div>
+<span class="text-slate-400 text-xs mt-1 whitespace-nowrap">上午 08:30</span>
+</div>
+</div>
+<div class="relative pl-12 pb-8">
+<div class="timeline-line bg-slate-200 dark:bg-slate-700"></div>
+<div class="absolute left-0 top-0 w-10 h-10 flex items-center justify-center">
+<div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center ring-4 ring-white dark:ring-background-dark">
+<span class="material-symbols-outlined text-white text-[16px]">check</span>
+</div>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<h4 class="font-bold">生命体征检查: 血压 120/80</h4>
+<div class="flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-green-500 text-[14px]">favorite</span>
+<span class="text-green-500 text-xs font-medium">正常</span>
+</div>
+</div>
+<span class="text-slate-400 text-xs mt-1">上午 09:15</span>
+</div>
+</div>
+<div class="relative pl-12 pb-8">
+<div class="timeline-line border-l-2 border-dashed border-primary"></div>
+<div class="absolute left-0 top-0 w-10 h-10 flex items-center justify-center">
+<div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center shadow-lg shadow-blue-200 dark:shadow-blue-900/20 ring-4 ring-white dark:ring-background-dark">
+<span class="material-symbols-outlined text-white text-[18px]">fitness_center</span>
+</div>
+</div>
+<div class="flex justify-between items-start">
+<div class="w-full">
+<h4 class="font-bold text-primary">康复训练 - 下肢</h4>
+<div class="mt-3 bg-blue-50/50 dark:bg-blue-900/10 p-3 rounded-2xl border border-blue-100 dark:border-blue-900/30">
+<p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed">进行抬腿和阻力带练习。重点锻炼股四头肌力量。</p>
+<div class="flex items-center gap-2 mt-3 text-primary">
+<span class="material-symbols-outlined text-[16px] animate-spin">hourglass_top</span>
+<span class="text-xs font-semibold">训练进行中...</span>
+</div>
+</div>
+</div>
+<span class="text-primary text-xs mt-1 font-medium whitespace-nowrap">上午 10:00</span>
+</div>
+</div>
+<div class="relative pl-12 pb-8 last-item">
+<div class="timeline-line bg-slate-200 dark:bg-slate-700"></div>
+<div class="absolute left-0 top-0 w-10 h-10 flex items-center justify-center">
+<div class="w-8 h-8 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center ring-4 ring-white dark:ring-background-dark">
+<span class="material-symbols-outlined text-slate-400 text-[18px]">restaurant</span>
+</div>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<h4 class="font-bold text-slate-400">午餐准备</h4>
+<p class="text-slate-400 text-sm mt-1">饮食限制：低钠。</p>
+</div>
+<span class="text-slate-400 text-xs mt-1">中午 12:00</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<div class="fixed bottom-24 left-4 right-4 flex gap-3">
+<button class="flex-1 bg-white dark:bg-slate-800 py-3 rounded-full shadow-lg border border-slate-100 dark:border-slate-700 flex items-center justify-center gap-2 font-bold active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-xl">star</span>
+<span>评价</span>
+</button>
+<button class="flex-[1.5] bg-primary py-3 rounded-full shadow-lg shadow-blue-200 dark:shadow-none flex items-center justify-center gap-2 text-white font-bold active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-xl">support_agent</span>
+<span>联系客服</span>
+</button>
+</div>
+<nav class="fixed bottom-0 left-0 right-0 bg-white/90 dark:bg-slate-900/90 backdrop-blur-lg border-t border-slate-100 dark:border-slate-800 px-2 pt-2 pb-6 flex justify-around items-center z-50">
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-200">home</span>
+<span class="text-[10px] text-slate-400">首页</span>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-200">bar_chart</span>
+<span class="text-[10px] text-slate-400">数据</span>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-200">dynamic_feed</span>
+<span class="text-[10px] text-slate-400">动态</span>
+</a>
+<a class="flex flex-col items-center gap-1" href="#">
+<span class="material-symbols-outlined text-primary">medical_services</span>
+<span class="text-[10px] text-primary font-bold">服务</span>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-200">person</span>
+<span class="text-[10px] text-slate-400">我的</span>
+</a>
+</nav>
+
+</body></html>
