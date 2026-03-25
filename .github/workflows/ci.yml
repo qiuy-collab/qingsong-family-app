@@ -55,13 +55,19 @@ jobs:
         run: npm run build
 
       - name: Setup Pages
+        id: pages
         uses: actions/configure-pages@v4
+        with:
+          enablement: true
+        continue-on-error: true
 
       - name: Upload artifact
+        if: steps.pages.outcome == 'success'
         uses: actions/upload-pages-artifact@v3
         with:
           path: './dist'
 
       - name: Deploy to GitHub Pages
+        if: steps.pages.outcome == 'success'
         id: deployment
         uses: actions/deploy-pages@v4
