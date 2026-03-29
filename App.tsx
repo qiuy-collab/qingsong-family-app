@@ -1,6 +1,4 @@
-
-import React, { useState, useCallback } from 'react';
-import { View } from './types';
+import React, { useCallback, useState } from 'react';
 import Intro from './pages/Intro';
 import Login from './pages/Login';
 import Home from './pages/Home';
@@ -11,19 +9,22 @@ import Dynamics from './pages/Dynamics';
 import ServiceTracking from './pages/ServiceTracking';
 import Profile from './pages/Profile';
 import Orders from './pages/Orders';
+import { storage } from './lib/storage';
+import { View } from './types';
 
 const App: React.FC = () => {
-  const [currentView, setCurrentView] = useState<View>(View.INTRO);
+  const hasToken = typeof window !== 'undefined' && Boolean(storage.getAccessToken());
+  const [currentView, setCurrentView] = useState<View>(hasToken ? View.HOME : View.INTRO);
   const [selectedOrgId, setSelectedOrgId] = useState<string | null>(null);
   const [toast, setToast] = useState<{ message: string; show: boolean }>({ message: '', show: false });
 
   const showToast = useCallback((message: string) => {
     setToast({ message, show: true });
-    setTimeout(() => setToast({ message: '', show: false }), 2500);
+    window.setTimeout(() => setToast({ message: '', show: false }), 2500);
   }, []);
 
-  const navigateTo = (view: View, params?: any) => {
-    if (view === View.ORG_DETAILS && params?.id) {
+  const navigateTo = (view: View, params?: Record<string, unknown>) => {
+    if (view === View.ORG_DETAILS && typeof params?.id === 'string') {
       setSelectedOrgId(params.id);
     }
     setCurrentView(view);
@@ -35,13 +36,38 @@ const App: React.FC = () => {
       case View.INTRO:
         return <Intro onComplete={() => navigateTo(View.LOGIN)} />;
       case View.LOGIN:
-        return <Login onLogin={() => { showToast('欢迎回来，登录成功'); navigateTo(View.HOME); }} />;
+        return (
+          <Login
+            onLogin={() => {
+              showToast('欢迎回来，登录成功');
+              navigateTo(View.HOME);
+            }}
+          />
+        );
       case View.HOME:
         return <Home onSelectOrg={(id) => navigateTo(View.ORG_DETAILS, { id })} onNavigate={navigateTo} onShowToast={showToast} />;
       case View.ORG_DETAILS:
-        return <OrgDetails orgId={selectedOrgId} onBack={() => navigateTo(View.HOME)} onSign={() => navigateTo(View.SIGNING)} onNavigate={navigateTo} onShowToast={showToast} />;
+        return (
+          <OrgDetails
+            orgId={selectedOrgId}
+            onBack={() => navigateTo(View.HOME)}
+            onSign={() => navigateTo(View.SIGNING)}
+            onNavigate={navigateTo}
+            onShowToast={showToast}
+          />
+        );
       case View.SIGNING:
-        return <SigningProcess onBack={() => navigateTo(View.ORG_DETAILS, { id: selectedOrgId })} onComplete={() => { showToast('签约申请已提交'); navigateTo(View.ORDERS); }} onShowToast={showToast} />;
+        return (
+          <SigningProcess
+            institutionId={selectedOrgId}
+            onBack={() => navigateTo(View.ORG_DETAILS, { id: selectedOrgId })}
+            onComplete={() => {
+              showToast('签约申请已提交');
+              navigateTo(View.ORDERS);
+            }}
+            onShowToast={showToast}
+          />
+        );
       case View.HEALTH:
         return <HealthData onNavigate={navigateTo} onShowToast={showToast} />;
       case View.DYNAMIC:
@@ -58,13 +84,16 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="max-w-[430px] mx-auto bg-background min-h-screen shadow-2xl relative flex flex-col overflow-x-hidden font-sans">
+    <div className="relative mx-auto flex min-h-screen max-w-[430px] flex-col overflow-x-hidden bg-background font-sans shadow-2xl">
       {renderView()}
-      
-      {/* Global Toast Component */}
-      <div className={`fixed top-10 left-1/2 -translate-x-1/2 z-[100] transition-all duration-300 transform ${toast.show ? 'translate-y-0 opacity-100' : '-translate-y-10 opacity-0 pointer-events-none'}`}>
-        <div className="bg-slate-900/90 text-white px-6 py-3 rounded-full text-sm font-medium backdrop-blur-md shadow-2xl flex items-center gap-2">
-          <span className="material-symbols-outlined text-primary text-lg">info</span>
+
+      <div
+        className={`fixed left-1/2 top-10 z-[100] -translate-x-1/2 transform transition-all duration-300 ${
+          toast.show ? 'translate-y-0 opacity-100' : '-translate-y-10 opacity-0 pointer-events-none'
+        }`}
+      >
+        <div className="flex items-center gap-2 rounded-full bg-slate-900/90 px-6 py-3 text-sm font-medium text-white shadow-2xl backdrop-blur-md">
+          <span className="material-symbols-outlined text-lg text-primary">info</span>
           {toast.message}
         </div>
       </div>

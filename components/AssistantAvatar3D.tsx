@@ -132,7 +132,7 @@ const ModelScene: React.FC<ModelSceneProps> = ({ active, gestureToken, onReady }
 
 const LoadingFallback: React.FC = () => (
   <div className="flex h-full w-full items-center justify-center">
-    <div className="h-12 w-12 rounded-full border-4 border-primary/15 border-t-primary animate-spin" />
+    <div className="h-12 w-12 animate-spin rounded-full border-4 border-primary/15 border-t-primary" />
   </div>
 );
 
@@ -183,11 +183,7 @@ const AssistantAvatar3D: React.FC<AssistantAvatar3DProps> = ({ active = false, o
       aria-label="打开松小暖助手"
     >
       <div className="pointer-events-none absolute bottom-3 left-1/2 h-7 w-16 -translate-x-1/2 rounded-full bg-slate-900/12 blur-md" />
-      <Canvas
-        camera={{ position: [0, 0.18, 4.2], fov: 22 }}
-        dpr={[1, 1.5]}
-        gl={{ antialias: true, alpha: true }}
-      >
+      <Canvas camera={{ position: [0, 0.18, 4.2], fov: 22 }} dpr={[1, 1.5]} gl={{ antialias: true, alpha: true }}>
         <ModelErrorBoundary fallback={null} onError={handleError}>
           <Suspense fallback={null}>
             <ModelScene active={active} gestureToken={gestureToken} onReady={handleReady} />
