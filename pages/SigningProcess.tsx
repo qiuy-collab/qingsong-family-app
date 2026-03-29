@@ -1,25 +1,29 @@
-
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
+import { appDataService } from '../services/appDataService';
 
 interface SigningProcessProps {
+  institutionId?: string | null;
   onBack: () => void;
   onComplete: () => void;
   onShowToast: (msg: string) => void;
 }
 
-const SigningProcess: React.FC<SigningProcessProps> = ({ onBack, onComplete, onShowToast }) => {
+const stepTitles = ['入住人信息', '订单配置', '在线签署'] as const;
+
+const SigningProcess: React.FC<SigningProcessProps> = ({ institutionId, onBack, onComplete, onShowToast }) => {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     name: '',
     idNumber: '',
     phone: '',
     relationship: '子女',
-    photo: null as string | null
+    photo: null as string | null,
   });
   const [isProPackage, setIsProPackage] = useState(false);
   const [signatureData, setSignatureData] = useState<string | null>(null);
   const [showSignatureModal, setShowSignatureModal] = useState(false);
-  
+  const [submitting, setSubmitting] = useState(false);
+
   const fileInputRef = useRef<HTMLInputElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isDrawing, setIsDrawing] = useState(false);
@@ -29,99 +33,131 @@ const SigningProcess: React.FC<SigningProcessProps> = ({ onBack, onComplete, onS
   const totalPrice = isProPackage ? basePrice + proPrice : basePrice;
 
   const handleInputChange = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData((current) => ({ ...current, [field]: value }));
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setFormData(prev => ({ ...prev, photo: reader.result as string }));
-        onShowToast('照片上传成功');
-      };
-      reader.readAsDataURL(file);
-    }
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setFormData((current) => ({ ...current, photo: reader.result as string }));
+      onShowToast('照片上传成功');
+    };
+    reader.readAsDataURL(file);
   };
 
-  // Canvas Drawing Logic
-  const startDrawing = (e: React.MouseEvent | React.TouchEvent) => {
+  const startDrawing = (event: React.MouseEvent | React.TouchEvent) => {
     setIsDrawing(true);
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
+    const context = canvas.getContext('2d');
+    if (!context) return;
 
     const rect = canvas.getBoundingClientRect();
-    const x = ('touches' in e) ? e.touches[0].clientX - rect.left : e.clientX - rect.left;
-    const y = ('touches' in e) ? e.touches[0].clientY - rect.top : e.clientY - rect.top;
+    const x = 'touches' in event ? event.touches[0].clientX - rect.left : event.clientX - rect.left;
+    const y = 'touches' in event ? event.touches[0].clientY - rect.top : event.clientY - rect.top;
 
-    ctx.beginPath();
-    ctx.moveTo(x, y);
+    context.beginPath();
+    context.moveTo(x, y);
   };
 
-  const draw = (e: React.MouseEvent | React.TouchEvent) => {
+  const draw = (event: React.MouseEvent | React.TouchEvent) => {
     if (!isDrawing) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
+    const context = canvas.getContext('2d');
+    if (!context) return;
 
     const rect = canvas.getBoundingClientRect();
-    const x = ('touches' in e) ? e.touches[0].clientX - rect.left : e.clientX - rect.left;
-    const y = ('touches' in e) ? e.touches[0].clientY - rect.top : e.clientY - rect.top;
+    const x = 'touches' in event ? event.touches[0].clientX - rect.left : event.clientX - rect.left;
+    const y = 'touches' in event ? event.touches[0].clientY - rect.top : event.clientY - rect.top;
 
-    ctx.lineTo(x, y);
-    ctx.strokeStyle = '#000';
-    ctx.lineWidth = 3;
-    ctx.lineCap = 'round';
-    ctx.stroke();
-    
-    // Prevent scrolling when drawing on touch devices
-    if ('touches' in e) e.preventDefault();
+    context.lineTo(x, y);
+    context.strokeStyle = '#000';
+    context.lineWidth = 3;
+    context.lineCap = 'round';
+    context.stroke();
+    if ('touches' in event) event.preventDefault();
   };
 
-  const stopDrawing = () => {
-    setIsDrawing(false);
-  };
+  const stopDrawing = () => setIsDrawing(false);
 
   const clearCanvas = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const context = canvas.getContext('2d');
+    if (!context) return;
+    context.clearRect(0, 0, canvas.width, canvas.height);
   };
 
   const saveSignature = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    
-    // Check if canvas is empty (optional but good)
-    const dataURL = canvas.toDataURL();
-    setSignatureData(dataURL);
+    setSignatureData(canvas.toDataURL());
     setShowSignatureModal(false);
-    onShowToast('签名已捕获');
+    onShowToast('签名已保存');
+  };
+
+  const submitOrder = async () => {
+    if (!signatureData) {
+      onShowToast('请先完成手写签名');
+      return;
+    }
+
+    try {
+      setSubmitting(true);
+      await appDataService.signOrder({
+        institution_id: institutionId ?? 'inst-1',
+        elder_id: 'e1234567-e89b-12d3-a456-426614174000',
+        name: formData.name,
+        id_number: formData.idNumber,
+        phone: formData.phone,
+        relationship: formData.relationship,
+        is_pro_package: isProPackage,
+        photo: formData.photo,
+        signature_data: signatureData,
+      });
+      onComplete();
+    } catch (error) {
+      onShowToast(error instanceof Error ? error.message : '签约提交失败');
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const handleNext = async () => {
+    if (step === 1) {
+      if (!formData.photo) return onShowToast('请上传入住人档案照片');
+      if (!formData.name.trim()) return onShowToast('请填写入住人姓名');
+      if (!formData.idNumber.trim() || formData.idNumber.length < 15) return onShowToast('请填写正确的身份证号');
+      if (!formData.phone.trim() || formData.phone.length < 11) return onShowToast('请填写正确的联系电话');
+      setStep(2);
+      return;
+    }
+
+    if (step === 2) {
+      setStep(3);
+      return;
+    }
+
+    await submitOrder();
   };
 
   const renderStep1 = () => (
-    <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-300">
-      <div className="bg-white p-6 rounded-3xl shadow-sm space-y-6">
-        <h3 className="font-bold text-lg">上传档案照片</h3>
+    <div className="animate-in fade-in slide-in-from-right-4 space-y-6 duration-300">
+      <div className="space-y-6 rounded-3xl bg-white p-6 shadow-sm">
+        <h3 className="text-lg font-bold">上传档案照片</h3>
         <div className="flex items-center gap-6">
-          <input 
-            type="file" 
-            ref={fileInputRef} 
-            className="hidden" 
-            accept="image/*" 
-            onChange={handleFileChange}
-          />
-          <div 
+          <input type="file" ref={fileInputRef} className="hidden" accept="image/*" onChange={handleFileChange} />
+          <div
             onClick={() => fileInputRef.current?.click()}
-            className={`w-24 h-24 rounded-2xl border-2 border-dashed flex flex-col items-center justify-center gap-1 cursor-pointer transition-all overflow-hidden ${formData.photo ? 'border-primary' : 'bg-slate-50 border-slate-200 active:bg-slate-100'}`}
+            className={`flex h-24 w-24 cursor-pointer flex-col items-center justify-center gap-1 overflow-hidden rounded-2xl border-2 border-dashed transition-all ${
+              formData.photo ? 'border-primary' : 'border-slate-200 bg-slate-50 active:bg-slate-100'
+            }`}
           >
             {formData.photo ? (
-              <img src={formData.photo} className="w-full h-full object-cover" alt="Preview" />
+              <img src={formData.photo} className="h-full w-full object-cover" alt="Preview" />
             ) : (
               <>
                 <span className="material-symbols-outlined text-slate-400">photo_library</span>
@@ -129,59 +165,63 @@ const SigningProcess: React.FC<SigningProcessProps> = ({ onBack, onComplete, onS
               </>
             )}
           </div>
-          <p className="flex-1 text-xs text-slate-400 leading-relaxed">
-            点击左侧上传老人近照。系统将<span className="text-primary font-medium">自动处理</span>背景和光照，生成符合标准的档案照。<span className="text-red-500 font-bold">*必填</span>
+          <p className="flex-1 text-xs leading-relaxed text-slate-400">
+            上传近期清晰照片，便于护理档案建立与身份核验。<span className="font-bold text-red-500"> *必填</span>
           </p>
         </div>
       </div>
 
-      <div className="bg-white p-6 rounded-3xl shadow-sm space-y-4">
+      <div className="space-y-4 rounded-3xl bg-white p-6 shadow-sm">
         <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-900 px-1 flex items-center justify-between">
-            入住人姓名 <span className="text-[10px] text-red-500 font-bold">必填</span>
+          <label className="flex items-center justify-between px-1 text-sm font-medium text-slate-900">
+            入住人姓名 <span className="text-[10px] font-bold text-red-500">必填</span>
           </label>
-          <input 
-            type="text" 
-            placeholder="请输入真实姓名" 
+          <input
+            type="text"
+            placeholder="请输入真实姓名"
             value={formData.name}
-            onChange={(e) => handleInputChange('name', e.target.value)}
-            className="w-full h-12 rounded-xl border-slate-100 bg-slate-50/50 px-4 focus:ring-primary focus:border-primary" 
+            onChange={(event) => handleInputChange('name', event.target.value)}
+            className="h-12 w-full rounded-xl border-slate-100 bg-slate-50/50 px-4 focus:border-primary focus:ring-primary"
           />
         </div>
         <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-900 px-1 flex items-center justify-between">
-            身份证号码 <span className="text-[10px] text-red-500 font-bold">必填</span>
+          <label className="flex items-center justify-between px-1 text-sm font-medium text-slate-900">
+            身份证号码 <span className="text-[10px] font-bold text-red-500">必填</span>
           </label>
-          <input 
-            type="text" 
-            placeholder="18位身份证号" 
+          <input
+            type="text"
+            placeholder="18 位身份证号码"
             value={formData.idNumber}
-            onChange={(e) => handleInputChange('idNumber', e.target.value)}
-            className="w-full h-12 rounded-xl border-slate-100 bg-slate-50/50 px-4 focus:ring-primary focus:border-primary" 
+            onChange={(event) => handleInputChange('idNumber', event.target.value)}
+            className="h-12 w-full rounded-xl border-slate-100 bg-slate-50/50 px-4 focus:border-primary focus:ring-primary"
           />
         </div>
         <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-900 px-1 flex items-center justify-between">
-            紧急联系人电话 <span className="text-[10px] text-red-500 font-bold">必填</span>
+          <label className="flex items-center justify-between px-1 text-sm font-medium text-slate-900">
+            紧急联系人电话 <span className="text-[10px] font-bold text-red-500">必填</span>
           </label>
-          <input 
-            type="tel" 
-            placeholder="联系人手机号码" 
+          <input
+            type="tel"
+            placeholder="联系人手机号"
             value={formData.phone}
-            onChange={(e) => handleInputChange('phone', e.target.value)}
-            className="w-full h-12 rounded-xl border-slate-100 bg-slate-50/50 px-4 focus:ring-primary focus:border-primary" 
+            onChange={(event) => handleInputChange('phone', event.target.value)}
+            className="h-12 w-full rounded-xl border-slate-100 bg-slate-50/50 px-4 focus:border-primary focus:ring-primary"
           />
         </div>
         <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-900 px-1">与入住人关系</label>
+          <label className="px-1 text-sm font-medium text-slate-900">与入住人关系</label>
           <div className="flex gap-2">
-            {['子女', '配偶', '本人', '其他'].map(r => (
-              <button 
-                key={r} 
-                onClick={() => setFormData(prev => ({ ...prev, relationship: r }))}
-                className={`flex-1 py-2.5 rounded-xl text-sm font-medium border transition-all ${formData.relationship === r ? 'bg-primary border-primary text-white shadow-md' : 'bg-slate-50 border-slate-100 text-slate-500 active:bg-slate-100'}`}
+            {['子女', '配偶', '本人', '其他'].map((relationship) => (
+              <button
+                key={relationship}
+                onClick={() => setFormData((current) => ({ ...current, relationship }))}
+                className={`flex-1 rounded-xl border py-2.5 text-sm font-medium transition-all ${
+                  formData.relationship === relationship
+                    ? 'border-primary bg-primary text-white shadow-md'
+                    : 'border-slate-100 bg-slate-50 text-slate-500 active:bg-slate-100'
+                }`}
               >
-                {r}
+                {relationship}
               </button>
             ))}
           </div>
@@ -191,81 +231,97 @@ const SigningProcess: React.FC<SigningProcessProps> = ({ onBack, onComplete, onS
   );
 
   const renderStep2 = () => (
-    <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-300">
-      <div className="bg-white p-6 rounded-3xl shadow-sm space-y-4">
-        <h3 className="font-bold text-lg">定制服务配置</h3>
+    <div className="animate-in fade-in slide-in-from-right-4 space-y-6 duration-300">
+      <div className="space-y-4 rounded-3xl bg-white p-6 shadow-sm">
+        <h3 className="text-lg font-bold">定制服务配置</h3>
         <div className="space-y-3">
-          <div className="p-4 rounded-2xl border-2 border-primary bg-blue-50/30 flex items-center justify-between">
+          <div className="flex items-center justify-between rounded-2xl border-2 border-primary bg-blue-50/30 p-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-white">
                 <span className="material-symbols-outlined">home</span>
               </div>
               <div>
-                <p className="font-bold text-sm">基础生活照护 <span className="text-[10px] px-1 bg-slate-100 text-slate-400 rounded">必选</span></p>
-                <p className="text-[10px] text-slate-400">包含每日膳食、房间清洁及监测</p>
-                <p className="text-primary font-bold text-sm mt-0.5">¥5000<span className="text-[10px] font-normal text-slate-400">/月</span></p>
+                <p className="text-sm font-bold">
+                  基础生活照护 <span className="rounded bg-slate-100 px-1 text-[10px] text-slate-400">必选</span>
+                </p>
+                <p className="text-[10px] text-slate-400">包含日常照料、餐食协助和健康监测。</p>
+                <p className="mt-0.5 text-sm font-bold text-primary">
+                  {basePrice} 元<span className="text-[10px] font-normal text-slate-400">/月</span>
+                </p>
               </div>
             </div>
-            <div className="w-5 h-5 bg-primary rounded-full flex items-center justify-center text-white">
+            <div className="flex h-5 w-5 items-center justify-center rounded-full bg-primary text-white">
               <span className="material-symbols-outlined text-xs font-bold">check</span>
             </div>
           </div>
-          
-          <div 
-            onClick={() => setIsProPackage(!isProPackage)}
-            className={`p-4 rounded-2xl border transition-all cursor-pointer flex items-center justify-between ${isProPackage ? 'border-primary bg-blue-50/30 shadow-sm' : 'border-slate-100 bg-slate-50/30 active:bg-slate-100'}`}
+
+          <div
+            onClick={() => setIsProPackage((current) => !current)}
+            className={`flex cursor-pointer items-center justify-between rounded-2xl border p-4 transition-all ${
+              isProPackage ? 'border-primary bg-blue-50/30 shadow-sm' : 'border-slate-100 bg-slate-50/30 active:bg-slate-100'
+            }`}
           >
             <div className="flex items-center gap-3">
-              <div className={`w-10 h-10 border rounded-xl flex items-center justify-center transition-colors ${isProPackage ? 'bg-primary text-white border-primary' : 'bg-white border-slate-100 text-slate-400'}`}>
+              <div
+                className={`flex h-10 w-10 items-center justify-center rounded-xl border transition-colors ${
+                  isProPackage ? 'border-primary bg-primary text-white' : 'border-slate-100 bg-white text-slate-400'
+                }`}
+              >
                 <span className="material-symbols-outlined">fitness_center</span>
               </div>
               <div>
-                <p className="font-bold text-sm">康复进阶包</p>
-                <p className="text-[10px] text-slate-400">专业物理治疗师提供每日康复训练指导</p>
-                <p className={`font-bold text-sm mt-0.5 transition-colors ${isProPackage ? 'text-primary' : 'text-slate-900'}`}>¥1500<span className="text-[10px] font-normal text-slate-400">/月</span></p>
+                <p className="text-sm font-bold">康复进阶包</p>
+                <p className="text-[10px] text-slate-400">每日康复训练、进度反馈和专项指导。</p>
+                <p className={`mt-0.5 text-sm font-bold ${isProPackage ? 'text-primary' : 'text-slate-900'}`}>
+                  {proPrice} 元<span className="text-[10px] font-normal text-slate-400">/月</span>
+                </p>
               </div>
             </div>
-            <div className={`w-5 h-5 rounded-full border-2 transition-all flex items-center justify-center ${isProPackage ? 'bg-primary border-primary text-white' : 'border-slate-200'}`}>
+            <div
+              className={`flex h-5 w-5 items-center justify-center rounded-full border-2 transition-all ${
+                isProPackage ? 'border-primary bg-primary text-white' : 'border-slate-200'
+              }`}
+            >
               {isProPackage && <span className="material-symbols-outlined text-xs font-bold">check</span>}
             </div>
           </div>
         </div>
       </div>
 
-      <div className="bg-white p-6 rounded-3xl shadow-sm">
-        <h3 className="font-bold text-lg mb-4">费用明细</h3>
-        <div className="flex justify-between text-sm mb-2">
+      <div className="rounded-3xl bg-white p-6 shadow-sm">
+        <h3 className="mb-4 text-lg font-bold">费用明细</h3>
+        <div className="mb-2 flex justify-between text-sm">
           <span className="text-slate-500">基础生活照护</span>
-          <span className="font-bold">¥5000</span>
+          <span className="font-bold">{basePrice} 元</span>
         </div>
         {isProPackage && (
-          <div className="flex justify-between text-sm mb-2 animate-in fade-in duration-300">
+          <div className="animate-in fade-in mb-2 flex justify-between text-sm duration-300">
             <span className="text-slate-500">康复进阶包</span>
-            <span className="font-bold">¥1500</span>
+            <span className="font-bold">{proPrice} 元</span>
           </div>
         )}
-        <div className="border-t border-dashed border-slate-100 my-4"></div>
-        <div className="flex justify-between items-baseline">
-          <span className="text-lg font-bold">月度预计总计</span>
-          <span className="text-2xl font-black text-primary transition-all scale-110">¥{totalPrice}</span>
+        <div className="my-4 border-t border-dashed border-slate-100" />
+        <div className="flex items-baseline justify-between">
+          <span className="text-lg font-bold">月度预估总计</span>
+          <span className="scale-110 text-2xl font-black text-primary">{totalPrice} 元</span>
         </div>
       </div>
     </div>
   );
 
   const renderStep3 = () => (
-    <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-300">
-      <div className="bg-white p-6 rounded-3xl shadow-sm flex flex-col items-center">
-        <div className="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center text-primary mb-4">
+    <div className="animate-in fade-in slide-in-from-right-4 space-y-6 duration-300">
+      <div className="flex flex-col items-center rounded-3xl bg-white p-6 shadow-sm">
+        <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-blue-50 text-primary">
           <span className="material-symbols-outlined text-3xl">contract_edit</span>
         </div>
-        <h3 className="font-bold text-xl mb-2">电子合同签署</h3>
-        <p className="text-sm text-slate-400 mb-6">请仔细核对以下签约信息</p>
-        
-        <div className="w-full bg-slate-50 rounded-2xl p-4 space-y-3 mb-6">
+        <h3 className="mb-2 text-xl font-bold">电子合同签署</h3>
+        <p className="mb-6 text-sm text-slate-400">请确认以下签约信息，并完成手写签名。</p>
+
+        <div className="mb-6 w-full space-y-3 rounded-2xl bg-slate-50 p-4">
           <div className="flex justify-between text-sm">
             <span className="text-slate-400">入住机构</span>
-            <span className="font-medium">阳光花园养老生活</span>
+            <span className="font-medium">阳光花园养老生活馆</span>
           </div>
           <div className="flex justify-between text-sm">
             <span className="text-slate-400">入住人</span>
@@ -277,14 +333,16 @@ const SigningProcess: React.FC<SigningProcessProps> = ({ onBack, onComplete, onS
           </div>
         </div>
 
-        <div 
+        <div
           onClick={() => setShowSignatureModal(true)}
-          className={`w-full h-48 rounded-2xl flex flex-col items-center justify-center gap-2 mb-4 border-2 border-dashed transition-all cursor-pointer overflow-hidden ${signatureData ? 'bg-blue-50 border-primary text-primary' : 'bg-white border-slate-100 text-slate-300 active:bg-slate-50'}`}
+          className={`mb-4 flex h-48 w-full cursor-pointer flex-col items-center justify-center gap-2 overflow-hidden rounded-2xl border-2 border-dashed transition-all ${
+            signatureData ? 'border-primary bg-blue-50 text-primary' : 'border-slate-100 bg-white text-slate-300 active:bg-slate-50'
+          }`}
         >
           {signatureData ? (
-            <div className="relative w-full h-full flex items-center justify-center">
-              <img src={signatureData} className="max-w-full max-h-full object-contain" alt="Signature" />
-              <div className="absolute top-2 right-2 bg-white/80 rounded-full p-1">
+            <div className="relative flex h-full w-full items-center justify-center">
+              <img src={signatureData} className="max-h-full max-w-full object-contain" alt="Signature" />
+              <div className="absolute right-2 top-2 rounded-full bg-white/80 p-1">
                 <span className="material-symbols-outlined text-sm">edit</span>
               </div>
             </div>
@@ -297,65 +355,37 @@ const SigningProcess: React.FC<SigningProcessProps> = ({ onBack, onComplete, onS
         </div>
 
         <p className="text-[10px] text-slate-400">
-          签署即代表您已阅读并同意 <span className="text-primary font-medium cursor-pointer" onClick={() => onShowToast('正在查看《入住服务协议》')}>《入住服务协议》</span>
+          签署即代表您已阅读并同意 <span className="cursor-pointer font-medium text-primary">《入住服务协议》</span>
         </p>
       </div>
     </div>
   );
 
-  const titles = ['入住人信息', '订单配置', '在线签署'];
-
-  const handleNext = () => {
-    if (step === 1) {
-      if (!formData.photo) {
-        onShowToast('请上传入住人档案照片');
-        return;
-      }
-      if (!formData.name.trim()) {
-        onShowToast('请填写入住人姓名');
-        return;
-      }
-      if (!formData.idNumber.trim() || formData.idNumber.length < 15) {
-        onShowToast('请填写正确的身份证号码');
-        return;
-      }
-      if (!formData.phone.trim() || formData.phone.length < 11) {
-        onShowToast('请填写正确的紧急联系电话');
-        return;
-      }
-      setStep(2);
-    } else if (step === 2) {
-      setStep(3);
-    } else {
-      if (!signatureData) {
-        onShowToast('请先完成手写签名');
-        return;
-      }
-      onComplete();
-    }
-  };
-
   return (
-    <div className="flex flex-col min-h-screen bg-slate-50 relative">
-      <header className="sticky top-0 z-50 bg-white px-4 py-4 flex items-center justify-between border-b border-slate-100">
-        <button onClick={step === 1 ? onBack : () => setStep(step - 1)} className="p-2 -ml-2 active:scale-90 transition-transform">
+    <div className="relative flex min-h-screen flex-col bg-slate-50">
+      <header className="sticky top-0 z-50 flex items-center justify-between border-b border-slate-100 bg-white px-4 py-4">
+        <button onClick={step === 1 ? onBack : () => setStep((current) => current - 1)} className="p-2 -ml-2 transition-transform active:scale-90">
           <span className="material-symbols-outlined text-xl">chevron_left</span>
         </button>
-        <h1 className="text-lg font-bold">{titles[step - 1]}</h1>
-        <div className="w-8"></div>
+        <h1 className="text-lg font-bold">{stepTitles[step - 1]}</h1>
+        <div className="w-8" />
       </header>
 
       <div className="px-6 py-8">
-        <div className="flex justify-between items-center mb-8 relative">
-          <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-slate-200 -translate-y-1/2 -z-10"></div>
-          <div className="absolute top-1/2 left-0 h-0.5 bg-primary -translate-y-1/2 -z-10 transition-all duration-500" style={{ width: `${(step - 1) * 50}%` }}></div>
-          {[1, 2, 3].map(i => (
-            <div key={i} className="flex flex-col items-center gap-1">
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold z-10 transition-colors ${step >= i ? 'bg-primary text-white scale-110 shadow-sm' : 'bg-slate-200 text-slate-400'}`}>
-                {step > i ? <span className="material-symbols-outlined text-xs font-bold">check</span> : i}
+        <div className="relative mb-8 flex items-center justify-between">
+          <div className="absolute left-0 right-0 top-1/2 -z-10 h-0.5 -translate-y-1/2 bg-slate-200" />
+          <div className="absolute left-0 top-1/2 -z-10 h-0.5 -translate-y-1/2 bg-primary transition-all duration-500" style={{ width: `${(step - 1) * 50}%` }} />
+          {[1, 2, 3].map((index) => (
+            <div key={index} className="flex flex-col items-center gap-1">
+              <div
+                className={`z-10 flex h-8 w-8 items-center justify-center rounded-full text-sm font-bold transition-colors ${
+                  step >= index ? 'scale-110 bg-primary text-white shadow-sm' : 'bg-slate-200 text-slate-400'
+                }`}
+              >
+                {step > index ? <span className="material-symbols-outlined text-xs font-bold">check</span> : index}
               </div>
-              <span className={`text-[10px] font-medium transition-colors ${step >= i ? 'text-primary font-bold' : 'text-slate-400'}`}>
-                {['基本信息', '定制服务', '确认签署'][i - 1]}
+              <span className={`text-[10px] font-medium ${step >= index ? 'font-bold text-primary' : 'text-slate-400'}`}>
+                {['基本信息', '定制服务', '确认签署'][index - 1]}
               </span>
             </div>
           ))}
@@ -364,43 +394,40 @@ const SigningProcess: React.FC<SigningProcessProps> = ({ onBack, onComplete, onS
         {step === 1 ? renderStep1() : step === 2 ? renderStep2() : renderStep3()}
       </div>
 
-      <footer className="mt-auto p-6 flex gap-3 bg-white border-t border-slate-50">
+      <footer className="mt-auto flex gap-3 border-t border-slate-50 bg-white p-6">
         {step > 1 && (
-          <button 
-            onClick={() => setStep(step - 1)}
-            className="w-14 h-14 bg-white border border-slate-100 rounded-2xl flex items-center justify-center text-slate-400 shadow-sm active:bg-slate-50 transition-colors"
+          <button
+            onClick={() => setStep((current) => current - 1)}
+            className="flex h-14 w-14 items-center justify-center rounded-2xl border border-slate-100 bg-white text-slate-400 shadow-sm transition-colors active:bg-slate-50"
           >
             <span className="material-symbols-outlined">arrow_back</span>
           </button>
         )}
-        <button 
-          onClick={handleNext}
-          className="flex-1 h-14 bg-primary text-white font-bold text-lg rounded-2xl shadow-lg shadow-primary/20 flex items-center justify-center gap-2 active:scale-95 active:shadow-none transition-all"
+        <button
+          onClick={() => void handleNext()}
+          disabled={submitting}
+          className="flex flex-1 items-center justify-center gap-2 rounded-2xl bg-primary text-lg font-bold text-white shadow-lg shadow-primary/20 transition-all active:scale-95 active:shadow-none disabled:bg-slate-300 disabled:shadow-none"
         >
-          <span>{step === 3 ? '确认支付并签署' : '确认并下一步'}</span>
+          <span>{step === 3 ? (submitting ? '提交中…' : '确认支付并签署') : '确认并下一步'}</span>
           <span className="material-symbols-outlined">arrow_forward</span>
         </button>
       </footer>
 
-      {/* Signature Modal */}
       {showSignatureModal && (
-        <div className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex flex-col items-center justify-center p-6 animate-in fade-in zoom-in duration-200">
-          <div className="bg-white w-full max-w-sm rounded-[2.5rem] overflow-hidden shadow-2xl flex flex-col">
-            <div className="px-6 py-5 border-b border-slate-100 flex justify-between items-center">
+        <div className="animate-in fade-in zoom-in fixed inset-0 z-[100] flex items-center justify-center bg-black/60 p-6 backdrop-blur-sm duration-200">
+          <div className="flex w-full max-w-sm flex-col overflow-hidden rounded-[2.5rem] bg-white shadow-2xl">
+            <div className="flex items-center justify-between border-b border-slate-100 px-6 py-5">
               <div>
-                <h4 className="font-bold text-lg">电子手写签名</h4>
-                <p className="text-[10px] text-slate-400">请在下方白色区域内完成您的手写签名</p>
+                <h4 className="text-lg font-bold">电子手写签名</h4>
+                <p className="text-[10px] text-slate-400">请在下方白色区域内完成您的手写签名。</p>
               </div>
-              <button 
-                onClick={() => setShowSignatureModal(false)}
-                className="w-8 h-8 flex items-center justify-center rounded-full bg-slate-50 text-slate-400 active:scale-90"
-              >
+              <button onClick={() => setShowSignatureModal(false)} className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-50 text-slate-400 active:scale-90">
                 <span className="material-symbols-outlined text-lg">close</span>
               </button>
             </div>
-            
-            <div className="p-4 bg-slate-50">
-              <canvas 
+
+            <div className="bg-slate-50 p-4">
+              <canvas
                 ref={canvasRef}
                 width={340}
                 height={200}
@@ -411,21 +438,21 @@ const SigningProcess: React.FC<SigningProcessProps> = ({ onBack, onComplete, onS
                 onTouchStart={startDrawing}
                 onTouchMove={draw}
                 onTouchEnd={stopDrawing}
-                className="w-full bg-white rounded-2xl border-2 border-slate-200 shadow-inner cursor-crosshair touch-none"
+                className="w-full touch-none cursor-crosshair rounded-2xl border-2 border-slate-200 bg-white shadow-inner"
               />
             </div>
 
-            <div className="p-6 flex gap-3">
-              <button 
+            <div className="flex gap-3 p-6">
+              <button
                 onClick={clearCanvas}
-                className="flex-1 py-3 border border-slate-200 text-slate-500 font-bold rounded-2xl active:bg-slate-50 transition-colors flex items-center justify-center gap-2"
+                className="flex flex-1 items-center justify-center gap-2 rounded-2xl border border-slate-200 py-3 font-bold text-slate-500 transition-colors active:bg-slate-50"
               >
                 <span className="material-symbols-outlined text-lg">delete</span>
                 清除重写
               </button>
-              <button 
+              <button
                 onClick={saveSignature}
-                className="flex-[1.5] py-3 bg-primary text-white font-bold rounded-2xl shadow-lg shadow-primary/20 active:scale-95 transition-transform flex items-center justify-center gap-2"
+                className="flex flex-[1.5] items-center justify-center gap-2 rounded-2xl bg-primary py-3 font-bold text-white shadow-lg shadow-primary/20 transition-transform active:scale-95"
               >
                 <span className="material-symbols-outlined text-lg">check_circle</span>
                 确认签名

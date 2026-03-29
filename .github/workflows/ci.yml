@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  frontend-build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -16,21 +16,78 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
+          node-version: '22'
+          cache: npm
 
-      - name: Install dependencies
+      - name: Install frontend dependencies
         run: npm ci
 
       - name: TypeScript check
         run: npx tsc --noEmit
-        continue-on-error: true
 
-      - name: Build
+      - name: Build frontend
         run: npm run build
 
+  backend-test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: qingsong_assistant
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d qingsong_assistant"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      PYTHONPATH: backend
+      DATABASE_URL: postgresql+psycopg://postgres:postgres@127.0.0.1:5432/qingsong_assistant
+      JWT_SECRET: ci-secret
+      LLM_PROVIDER_NAME: baishan
+      LLM_BASE_URL: https://api.edgefn.net/v1
+      LLM_API_FORMAT: openai
+      LLM_MODEL: GLM-5
+      LLM_API_KEY: ''
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install backend dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r backend/requirements.txt
+
+      - name: Run migrations
+        working-directory: backend
+        run: python -m alembic -c alembic.ini upgrade head
+
+      - name: Seed demo data
+        run: |
+          python - <<'PY'
+          from app.db.session import SessionLocal
+          from app.services.seed import seed_demo_data
+
+          db = SessionLocal()
+          try:
+              seed_demo_data(db)
+          finally:
+              db.close()
+          PY
+
+      - name: Run backend tests
+        run: pytest backend/tests -q
+
   deploy:
-    needs: build
+    needs: [frontend-build, backend-test]
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     permissions:
@@ -46,29 +103,24 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
+          node-version: '22'
+          cache: npm
 
-      - name: Install dependencies
+      - name: Install frontend dependencies
         run: npm ci
 
-      - name: Build
+      - name: Build frontend
         run: npm run build
 
       - name: Setup Pages
         id: pages
-        uses: actions/configure-pages@v4
-        with:
-          enablement: true
-        continue-on-error: true
+        uses: actions/configure-pages@v5
 
       - name: Upload artifact
-        if: steps.pages.outcome == 'success'
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist'
+          path: ./dist
 
       - name: Deploy to GitHub Pages
-        if: steps.pages.outcome == 'success'
         id: deployment
         uses: actions/deploy-pages@v4

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { View } from '../types';
 
@@ -17,18 +16,16 @@ const BottomNav: React.FC<BottomNavProps> = ({ activeView, onNavigate }) => {
   ];
 
   return (
-    <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] bg-white/90 dark:bg-black/90 backdrop-blur-lg border-t border-slate-100 flex justify-around items-center pt-2 pb-6 z-50">
+    <nav className="fixed bottom-0 left-1/2 z-50 flex w-full max-w-[430px] -translate-x-1/2 items-center justify-around border-t border-slate-100 bg-white/90 pb-6 pt-2 backdrop-blur-lg">
       {navItems.map((item) => (
         <button
           key={item.view}
           onClick={() => onNavigate(item.view)}
-          className={`flex flex-col items-center gap-1 w-1/5 transition-colors ${
+          className={`flex w-1/5 flex-col items-center gap-1 transition-colors ${
             activeView === item.view ? 'text-primary' : 'text-slate-400'
           }`}
         >
-          <span className={`material-symbols-outlined ${activeView === item.view ? 'fill-icon' : ''}`}>
-            {item.icon}
-          </span>
+          <span className={`material-symbols-outlined ${activeView === item.view ? 'fill-icon' : ''}`}>{item.icon}</span>
           <span className="text-[10px] font-medium">{item.label}</span>
         </button>
       ))}
